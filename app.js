@@ -89,11 +89,21 @@ const ILUS = {   // ilustraciones propias de cada juego
     <path d="M48 34 C54 28 60 20 65 19 C70 18 66 40 66 52" fill="none" stroke="#1B2A6B" stroke-width="10" stroke-linecap="round"/><circle cx="66" cy="54" r="6" fill="#FFE27A" stroke="#fff" stroke-width="2"/></svg>`,
   globos: `<svg viewBox="0 0 120 90">${[[34, 38, "#FF5A4E"], [60, 30, "#FFC21A"], [86, 40, "#3D8BFF"]].map(([x, y, c]) => `<path d="M${x} ${y + 16} q-3 12 2 26" stroke="#fff" stroke-width="1.5" fill="none"/><ellipse cx="${x}" cy="${y}" rx="13" ry="16" fill="${c}" stroke="#fff" stroke-width="2.5"/><ellipse cx="${x - 4}" cy="${y - 6}" rx="3" ry="5" fill="#fff" opacity=".5"/>`).join("")}</svg>`,
 };
+ILUS.busca = `<svg viewBox="0 0 120 90">${[["3", 30, "#FF8A1F"], ["1", 60, "#14B8B0"], ["5", 90, "#8E6CF0"]].map(([n, x, c]) => `<rect x="${x - 15}" y="30" width="30" height="30" rx="8" fill="${c}" stroke="#fff" stroke-width="2.5"/><text x="${x}" y="53" text-anchor="middle" font-size="22" font-family="Fredoka" fill="#fff">${n}</text>`).join("")}<circle cx="72" cy="30" r="7" fill="#FFC21A" stroke="#fff" stroke-width="2"/></svg>`;
+ILUS.donde = `<svg viewBox="0 0 120 90"><ellipse cx="32" cy="64" rx="24" ry="6" fill="#fff"/><ellipse cx="88" cy="64" rx="24" ry="6" fill="#fff"/><g transform="translate(32 50) scale(.42)"><path d="M0 -26 C-26 -40 -46 -14 -40 8 C-34 30 -14 38 0 30 C14 38 34 30 40 8 C46 -14 26 -40 0 -26Z" fill="#E0262E"/></g>${[76, 88, 100].map((x) => `<g transform="translate(${x} 52) scale(.3)"><path d="M0 -26 C-26 -40 -46 -14 -40 8 C-34 30 -14 38 0 30 C14 38 34 30 40 8 C46 -14 26 -40 0 -26Z" fill="#E0262E"/></g>`).join("")}<text x="32" y="26" text-anchor="middle" font-size="18" font-family="Fredoka" fill="#14B8B0">1</text></svg>`;
+ILUS.memoria = `<svg viewBox="0 0 120 90"><rect x="16" y="20" width="26" height="34" rx="6" fill="#14B8B0" stroke="#fff" stroke-width="2.5"/><circle cx="29" cy="37" r="5" fill="#FFC83A"/><rect x="47" y="20" width="26" height="34" rx="6" fill="#fff" stroke="#14B8B0" stroke-width="2.5"/><polygon points="60,28 62.5,34 69,34 64,38 66,44 60,40 54,44 56,38 51,34 57.5,34" fill="#FFC21A"/><rect x="78" y="20" width="26" height="34" rx="6" fill="#14B8B0" stroke="#fff" stroke-width="2.5"/><circle cx="91" cy="37" r="5" fill="#FFC83A"/></svg>`;
+ILUS.colorea = `<svg viewBox="0 0 120 90"><path d="M44 34 C50 28 56 20 61 19 C66 18 62 44 62 70" fill="none" stroke="#1B2A6B" stroke-width="14" stroke-linecap="round"/><path d="M44 34 C50 28 56 20 61 19 C66 18 62 44 62 70" fill="none" stroke="#FF6FAE" stroke-width="9" stroke-linecap="round"/><g transform="translate(86 44) rotate(35)"><rect x="-4" y="-22" width="8" height="30" rx="3" fill="#8B5A2B"/><path d="M-6 8 h12 v6 q-6 10 -12 0z" fill="#FF5A4E"/></g></svg>`;
+ILUS.rompe = `<svg viewBox="0 0 120 90"><rect x="34" y="14" width="26" height="30" rx="5" fill="#14B8B0" stroke="#fff" stroke-width="2.5"/><rect x="62" y="14" width="26" height="30" rx="5" fill="#14B8B0" stroke="#fff" stroke-width="2.5" transform="rotate(8 75 29)"/><rect x="34" y="46" width="26" height="30" rx="5" fill="#14B8B0" stroke="#fff" stroke-width="2.5"/><rect x="64" y="50" width="26" height="30" rx="5" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="4 3"/><circle cx="47" cy="58" r="4" fill="#FFC83A"/></svg>`;
 const JUEGOS = [
   { id: "puntitos", nombre: "Cuenta los puntitos", desc: "Toca cada puntito y cuéntalos en voz alta.", c: "#FFE9A6" },
-  { id: "cuantos", nombre: "¿Cuántos hay?", desc: "Cuenta las manzanas y elige el número.", c: "#FFD3CF" },
+  { id: "cuantos", nombre: "¿Cuántos hay?", desc: "Cuenta y elige el número correcto.", c: "#FFD3CF" },
   { id: "trazo", nombre: "Traza el 1", desc: "Sigue el camino con tu dedito.", c: "#C9F0EC" },
-  { id: "globos", nombre: "Revienta globos", desc: "Revienta cinco globos y cuéntalos.", c: "#DCD2FF" },
+  { id: "globos", nombre: "Revienta globos", desc: "Revienta los globos y cuéntalos.", c: "#DCD2FF" },
+  { id: "busca", nombre: "Encuentra el 1", desc: "Busca todos los unos escondidos.", c: "#CFE3FF" },
+  { id: "donde", nombre: "¿Dónde hay uno?", desc: "Toca el grupo que tiene solo uno.", c: "#FFE0C2" },
+  { id: "memoria", nombre: "Memoria", desc: "Voltea las tarjetas y encuentra parejas.", c: "#D6F2D0" },
+  { id: "colorea", nombre: "Colorea", desc: "Pinta a Uno y el prado con tus colores.", c: "#FFD6EA" },
+  { id: "rompe", nombre: "Arma a Uno", desc: "Arrastra las piezas del rompecabezas.", c: "#E4DAFF" },
 ];
 const tarjetaJuego = (j) => `<a class="juego-tarjeta" href="#juego/${j.id}"><div class="ilus" style="--c:${j.c}">${ILUS[j.id]}</div>
   <div class="txt"><h3>${j.nombre}</h3><p>${j.desc}</p></div></a>`;
@@ -141,9 +151,9 @@ const VISTAS = {
 
     <section class="seccion marino">
       <div class="contenedor">
-        <div class="encabezado"><div><h2>Juegos para aprender</h2><p>Todos hablan, así que no hace falta saber leer. Se juegan con un dedito en el celular o la tableta.</p></div>
+        <div class="encabezado"><div><h2>Juegos para aprender</h2><p>Nueve juegos que hablan, así que no hace falta saber leer. Se juegan con un dedito en el celular o la tableta.</p></div>
           <a class="enlace-flecha" href="#juegos" style="color:#fff">Todos los juegos</a></div>
-        <div class="rejilla">${JUEGOS.map(tarjetaJuego).join("")}</div>
+        <div class="rejilla">${JUEGOS.slice(0, 8).map(tarjetaJuego).join("")}</div>
       </div>
     </section>
 
@@ -298,6 +308,11 @@ const VISTAS = {
   "juego/cuantos": () => juegoCuantos(),
   "juego/trazo": () => juegoTrazo(),
   "juego/globos": () => juegoGlobos(),
+  "juego/busca": () => juegoBusca(),
+  "juego/donde": () => juegoDonde(),
+  "juego/memoria": () => juegoMemoria(),
+  "juego/colorea": () => juegoColorea(),
+  "juego/rompe": () => juegoRompe(),
 };
 
 /* ================= navegación ================= */
