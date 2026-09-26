@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuentatún · Caricaturas para aprender números y letras</title>
+<meta name="description" content="Cuentatún: caricaturas educativas en español para niños de 2 a 5 años. Números, letras, canciones y mucha alegría.">
+<meta property="og:title" content="Cuentatún · donde viven los números y las letras">
+<meta property="og:description" content="Caricaturas educativas en español para niños de 2 a 5 años.">
+<meta property="og:image" content="https://cuentatun.com/img/compartir.jpg">
+<meta property="og:url" content="https://cuentatun.com/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1B2A6B">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="img/icono-180.png">
+<style>
+@font-face { font-family: "Fredoka"; src: url("fuentes/fredoka-bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Baloo 2"; src: url("fuentes/baloo2-extrabold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+:root {
+  --marino: #1B2A6B; --marino-2: #2E45A8; --coral: #FF5A4E; --sol: #FFC21A; --turquesa: #14B8B0;
+  --violeta: #8E6CF0; --rosa: #FF6FAE; --naranja: #FF8A1F; --azul: #3D8BFF;
+  --crema: #FFF7E6; --texto: #28324F; --suave: #5B6480;
+  --redondo: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--redondo); color: var(--texto); background: var(--crema); line-height: 1.55; font-size: 18px; }
+img { max-width: 100%; height: auto; display: block; }
+.portada .envoltura > *, .papas .envoltura > * { min-width: 0; }
+a { color: inherit; }
+.envoltura { width: min(1100px, 100% - 32px); margin-inline: auto; }
+h1, h2, h3 { font-family: "Fredoka", var(--redondo); color: var(--marino); line-height: 1.15; margin: 0 0 .5em; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+h3 { font-size: 1.35rem; }
+.boton { display: inline-flex; align-items: center; gap: .6em; font-family: "Fredoka", var(--redondo); font-size: 1.2rem;
+  text-decoration: none; color: #fff; background: var(--coral); padding: .85em 1.5em; border-radius: 999px;
+  box-shadow: 0 6px 0 #C7392F; transition: transform .15s, box-shadow .15s; }
+.boton:hover { transform: translateY(2px); box-shadow: 0 4px 0 #C7392F; }
+.boton:focus-visible { outline: 4px solid var(--sol); outline-offset: 4px; }
+.boton svg { width: 1.4em; height: 1.4em; }
+
+/* ---------- portada ---------- */
+.portada { position: relative; overflow: hidden; color: var(--marino);
+  background: linear-gradient(180deg, #7FC4FF 0%, #BFE3FF 55%, #DDF3FF 100%); padding: 28px 0 0; }
+.portada::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: -60px; height: 170px;
+  background: #7ACB62; border-radius: 50% 50% 0 0 / 100% 100% 0 0; box-shadow: 0 -18px 0 #A2DC84; }
+.nube { position: absolute; background: #fff; border-radius: 999px; opacity: .95; }
+.nube::before, .nube::after { content: ""; position: absolute; background: #fff; border-radius: 50%; }
+.nube.n1 { width: 170px; height: 52px; top: 70px; left: 6%; }
+.nube.n1::before { width: 80px; height: 80px; top: -40px; left: 28px; } .nube.n1::after { width: 60px; height: 60px; top: -26px; left: 88px; }
+.nube.n2 { width: 130px; height: 42px; top: 150px; right: 8%; }
+.nube.n2::before { width: 62px; height: 62px; top: -32px; left: 20px; } .nube.n2::after { width: 48px; height: 48px; top: -20px; left: 66px; }
+.portada .envoltura { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: end; }
+.portada .texto { padding: 40px 0 150px; }
+.portada .logo { width: min(560px, 100%); margin-bottom: 18px; filter: drop-shadow(0 6px 0 rgba(27,42,107,.15)); }
+.portada p.lema { font-family: "Baloo 2", var(--redondo); font-size: clamp(1.3rem, 2.6vw, 1.75rem); margin: 0 0 1.4em; color: var(--marino); }
+.portada .uno { width: min(380px, 80%); margin: 0 auto 70px; animation: brinco 2.8s ease-in-out infinite; transform-origin: bottom center; }
+@keyframes brinco { 0%, 100% { transform: translateY(0) } 45% { transform: translateY(-14px) } 55% { transform: translateY(-14px) scaleY(1.02) } }
+@media (prefers-reduced-motion: reduce) { .portada .uno { animation: none; } html { scroll-behavior: auto; } }
+
+/* ---------- secciones ---------- */
+section { padding: 72px 0; }
+.intro { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+.intro p { color: var(--suave); font-size: 1.15rem; }
+.tarjetas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.tarjeta { background: #fff; border-radius: 28px; padding: 28px; box-shadow: 0 8px 0 rgba(27,42,107,.08); border: 3px solid #F2E8D2; }
+.tarjeta .icono { width: 64px; height: 64px; border-radius: 20px; display: grid; place-items: center; margin-bottom: 14px;
+  font-family: "Fredoka", var(--redondo); font-size: 2rem; color: #fff; }
+.tarjeta p { margin: 0; color: var(--suave); }
+
+.temporada { background: var(--marino); color: #fff; }
+.temporada h2 { color: #fff; }
+.temporada .intro p { color: #C8D2FF; }
+.fichas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.ficha { border-radius: 24px; background: #26377F; padding: 18px 10px 16px; text-align: center; border: 3px solid #34489A; }
+.ficha b { display: grid; place-items: center; width: 74px; height: 74px; margin: 0 auto 10px; border-radius: 50%;
+  font-family: "Fredoka", var(--redondo); font-size: 2.4rem; color: #fff; border: 4px solid #fff; box-shadow: 0 5px 0 rgba(0,0,0,.25); }
+.ficha span { display: block; font-weight: 700; }
+.ficha small { color: #AEB9F0; }
+.ficha.lista { background: #fff; border-color: var(--sol); color: var(--marino); }
+.ficha.lista small { color: var(--turquesa); font-weight: 800; }
+
+.papas .envoltura { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
+.papas ul { list-style: none; padding: 0; margin: 0; }
+.papas li { position: relative; padding-left: 44px; margin-bottom: 16px; }
+.papas li::before { content: ""; position: absolute; left: 0; top: 2px; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--sol) radial-gradient(circle at 35% 35%, #FFE58A 0 30%, transparent 32%); box-shadow: 0 0 0 4px var(--marino); }
+.marco { border-radius: 32px; overflow: hidden; border: 6px solid #fff; box-shadow: 0 10px 0 rgba(27,42,107,.12); }
+
+.llamado { text-align: center; background: linear-gradient(180deg, #FFE9A8, #FFD66B); }
+.llamado p { color: var(--marino); font-size: 1.2rem; margin: 0 0 1.4em; }
+
+footer { background: var(--marino); color: #C8D2FF; padding: 36px 0; font-size: .95rem; }
+footer .envoltura { display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: space-between; align-items: center; }
+footer img { width: 170px; }
+footer a { color: #fff; }
+
+@media (max-width: 820px) {
+  .portada .envoltura, .papas .envoltura { grid-template-columns: 1fr; }
+  .portada .texto { padding: 20px 0 0; text-align: center; }
+  .portada .logo { margin-inline: auto; }
+  .portada .uno { width: 220px; margin-bottom: 90px; }
+  .tarjetas { grid-template-columns: 1fr; }
+  .fichas { grid-template-columns: repeat(2, 1fr); }
+  .nube.n2 { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="portada">
+  <div class="nube n1"></div><div class="nube n2"></div>
+  <div class="envoltura">
+    <div class="texto">
+      <h1 style="margin:0"><img class="logo" src="img/logo.png" alt="Cuentatún" width="1100" height="238"></h1>
+      <p class="lema">Donde viven los números y las letras.<br>Caricaturas en español para niños de 2 a 5 años.</p>
+      <a class="boton" href="https://www.youtube.com/@Cuentatun" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.8 15.1V8.9l5.7 3.1Z"/></svg>
+        Ver en YouTube
+      </a>
+    </div>
+    <img class="uno" src="img/uno.png" alt="Uno, el número 1 de Cuentatún, saludando" width="620" height="730">
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="envoltura">
+      <div class="intro">
+        <h2>¿Qué es Cuentatún?</h2>
+        <p>Un mundo de colinas y flores donde los números y las letras son personajes. En cada episodio llega un amigo nuevo, y los peques aprenden a reconocerlo, a contarlo, a trazarlo con el dedito y a cantar con él.</p>
+      </div>
+      <div class="tarjetas">
+        <article class="tarjeta">
+          <div class="icono" style="background:var(--turquesa)">1</div>
+          <h3>Lo que se dice, se ve</h3>
+          <p>Si decimos “uno”, en pantalla hay exactamente uno. Cada número tiene tantos puntitos dorados en la panza como vale.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="icono" style="background:var(--coral)">A</div>
+          <h3>Números y letras</h3>
+          <p>Primero los números del 1 al 5 y las vocales. Cada episodio repasa a todos los amigos anteriores.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="icono" style="background:var(--violeta)">♪</div>
+          <h3>Tranquilo y alegre</h3>
+          <p>Ritmo pausado, colores suaves, canciones originales y nada de sustos. Con pausas para que tu peque conteste.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="temporada">
+    <div class="envoltura">
+      <div class="intro">
+        <h2>Temporada 1</h2>
+        <p>Diez amigos nuevos: los números del 1 al 5 y las vocales A, E, I, O, U.</p>
+      </div>
+      <div class="fichas">
+        <div class="ficha lista"><b style="background:var(--turquesa)">1</b><span>¡Llega el Uno!</span><small>¡Ya disponible!</small></div>
+        <div class="ficha"><b style="background:var(--coral)">A</b><span>La A</span><small>Próximamente</small></div>
+        <div class="ficha"><b style="background:var(--naranja)">2</b><span>El Dos</span><small>Próximamente</small></div>
+        <div class="ficha"><b style="background:var(--rosa)">E</b><span>La E</span><small>Próximamente</small></div>
+        <div class="ficha"><b style="background:var(--sol)">3</b><span>El Tres</span><small>Próximamente</small></div>
+        <div class="ficha"><b style="background:var(--violeta)">I</b><span>La I</span><small>Próximamente</small></div>
+        <div class="ficha"><b style="background:var(--azul)">4</b><span>El Cuatro</span><small>Próximamente</small></div>
+        <div class="ficha"><b style="background:var(--coral)">O</b><span>La O</span><small>Próximamente</small></div>
+        <div class="ficha"><b style="background:var(--turquesa)">5</b><span>El Cinco</span><small>Próximamente</small></div>
+        <div class="ficha"><b style="background:var(--naranja)">U</b><span>La U</span><small>Próximamente</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="papas">
+    <div class="envoltura">
+      <div class="marco"><img src="img/compartir.jpg" alt="El mundo de Cuentatún: el prado, la casita, el árbol y Uno" width="1200" height="630" loading="lazy"></div>
+      <div>
+        <h2>Para mamás, papás y maestros</h2>
+        <ul>
+          <li><b>Hecho para niños.</b> Nuestro canal de YouTube está marcado como contenido infantil: sin comentarios ni anuncios personalizados.</li>
+          <li><b>Originales.</b> Personajes, canciones y música creados para Cuentatún.</li>
+          <li><b>Aprender jugando.</b> Contar, reconocer, trazar y cantar, con repasos en cada episodio.</li>
+          <li><b>Para ver juntos.</b> Les invitamos a contar en voz alta y a trazar los números en el aire con su peque.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="llamado">
+    <div class="envoltura">
+      <h2>¡Vamos a contar!</h2>
+      <p>Los episodios de Cuentatún están en YouTube.</p>
+      <a class="boton" href="https://www.youtube.com/@Cuentatun" rel="noopener">Ver Cuentatún en YouTube</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="envoltura">
+    <img src="img/logo.png" alt="Cuentatún" width="1100" height="238" loading="lazy">
+    <div>
+      Contacto: <a href="mailto:cuentatun.com@gmail.com">cuentatun.com@gmail.com</a><br>
+      <a href="privacidad.html">Aviso de privacidad</a> · © 2026 Cuentatún · Un desarrollo de CorexDev
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
