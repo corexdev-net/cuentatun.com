@@ -252,3 +252,59 @@ audio { width: min(620px, 100%); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* ================= modo juego (pantalla completa) ================= */
+body.modo-juego { overflow: hidden; }
+body.modo-juego .cabecera, body.modo-juego .pie { display: none; }
+.jf { position: fixed; inset: 0; z-index: 35; display: flex; flex-direction: column; background: #fff; }
+.jbar { display: flex; align-items: center; gap: 10px; padding: calc(10px + env(safe-area-inset-top)) 14px 10px; background: #fff; box-shadow: 0 2px 12px rgba(27,42,107,.1); z-index: 3; }
+.jbtn { position: relative; width: 50px; height: 50px; border-radius: 50%; border: 0; background: var(--cielo); color: var(--marino); display: grid; place-items: center;
+  cursor: pointer; text-decoration: none; flex: none; transition: transform .12s; }
+.jbtn:active { transform: scale(.92); }
+.jbtn svg { width: 26px; height: 26px; fill: currentColor; }
+.jbtn.apagado { opacity: .55; }
+.jbtn.apagado::after { content: ""; position: absolute; width: 34px; height: 4px; border-radius: 2px; background: var(--coral); transform: rotate(-45deg); }
+.jtitulo { flex: 1; min-width: 0; font-family: var(--titulo); font-size: 22px; color: var(--marino); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jprogreso { display: flex; gap: 4px; }
+.jprogreso i { display: grid; place-items: center; width: 36px; height: 36px; }
+.jprogreso svg { width: 34px; height: 34px; fill: #E3E8F3; transition: fill .2s; }
+.jprogreso i.llena svg { fill: var(--sol); filter: drop-shadow(0 2px 0 #E0A000); }
+.jescena { position: relative; flex: 1; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none;
+  background: linear-gradient(#78C0FF, #CDEBFF 72%); }
+.jsol { position: absolute; top: 7%; left: 5%; width: clamp(56px, 8vw, 96px); aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #FFF6C2, #FFD24A 70%); box-shadow: 0 0 60px #FFE28A; animation: latir 3s ease-in-out infinite alternate; }
+.jcielo .nube { position: absolute; background: #fff; border-radius: 999px; opacity: .95; }
+.jcielo .nube::before, .jcielo .nube::after { content: ""; position: absolute; background: #fff; border-radius: 50%; }
+.jcielo .nube.n1 { width: 150px; height: 46px; top: 10%; left: 24%; animation: nubes 22s linear infinite alternate; }
+.jcielo .nube.n1::before { width: 70px; height: 70px; top: -36px; left: 24px; } .jcielo .nube.n1::after { width: 52px; height: 52px; top: -22px; left: 78px; }
+.jcielo .nube.n2 { width: 120px; height: 38px; top: 18%; right: 14%; animation: nubes 28s linear infinite alternate-reverse; }
+.jcielo .nube.n2::before { width: 56px; height: 56px; top: -28px; left: 18px; } .jcielo .nube.n2::after { width: 42px; height: 42px; top: -18px; left: 60px; }
+@keyframes nubes { to { transform: translateX(120px); } }
+@keyframes latir { to { transform: scale(1.08); } }
+.jcolinas { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34%; }
+.jcapa { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tocable { cursor: pointer; }
+.jguia { position: absolute; right: 2%; bottom: 1%; width: clamp(78px, 11vw, 136px); pointer-events: none; transform-origin: bottom center; z-index: 2; }
+.jburbuja { position: absolute; top: -30px; left: -36px; width: 54px; height: 54px; border-radius: 50%; background: #fff; display: grid; place-items: center;
+  box-shadow: var(--sombra); opacity: 0; transform: scale(.4); transition: opacity .2s, transform .2s; }
+.jburbuja svg { width: 28px; height: 28px; fill: var(--marino); }
+.jburbuja.on { opacity: 1; transform: scale(1); }
+.jmano { position: absolute; width: 70px; height: 70px; pointer-events: none; opacity: 0; z-index: 4; transition: opacity .25s; filter: drop-shadow(0 4px 6px rgba(0,0,0,.25)); }
+.jmano.on { opacity: 1; animation: tocar 1.1s ease-in-out infinite; }
+@keyframes tocar { 0%, 100% { transform: translate(0, 0) } 50% { transform: translate(-8px, -12px) scale(.9) } }
+.jpremio { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; background: rgba(15,24,66,.45); animation: aparecer-fondo .3s; }
+@keyframes aparecer-fondo { from { opacity: 0 } }
+.jpremio-tarjeta { width: min(420px, 90%); background: #fff; border-radius: 34px; padding: 26px 30px 30px; text-align: center; box-shadow: var(--sombra-alta);
+  animation: saltar .55s cubic-bezier(.3,1.5,.5,1); }
+@keyframes saltar { from { transform: scale(.4); opacity: 0 } }
+.jpremio-tarjeta img { width: 130px; margin: 0 auto; animation: brinco 1.4s ease-in-out infinite; transform-origin: bottom; }
+.jpremio-tarjeta h2 { font-size: 42px; margin: 8px 0 20px; }
+.jpremio-estrellas { display: flex; justify-content: center; gap: 6px; font-size: 58px; line-height: 1; color: var(--sol); text-shadow: 0 4px 0 #E0A000; }
+.jpremio-estrellas i { font-style: normal; animation: saltar .5s both cubic-bezier(.3,1.5,.5,1); }
+.jpremio-estrellas i:nth-child(2) { animation-delay: .15s; font-size: 72px; } .jpremio-estrellas i:nth-child(3) { animation-delay: .3s; }
+@media (max-width: 560px) {
+  .jtitulo { font-size: 18px; }
+  .jprogreso i { width: 26px; height: 26px; } .jprogreso svg { width: 24px; height: 24px; }
+  .jbtn { width: 44px; height: 44px; }
+  #jmudo { display: none; }
+}
