@@ -76,8 +76,8 @@ function confeti(n = 90) {
 
 /* ================= datos ================= */
 const PERSONAJES = [
-  { id: "uno", s: "1", nombre: "Uno", color: C.turquesa, fondo: "#DDF6F4", listo: true, lema: "¡Yo tengo un puntito!" },
-  { id: "a", s: "A", nombre: "La A", color: C.coral }, { id: "dos", s: "2", nombre: "Dos", color: C.naranja },
+  { id: "uno", s: "1", nombre: "Uno", color: C.turquesa, fondo: "#DDF6F4", listo: true, lema: "¡Yo tengo un puntito!", img: "img/uno.png" },
+  { id: "a", s: "A", nombre: "La A", color: C.coral, fondo: "#FFE0DC", listo: true, lema: "¡Yo hago aaa!", img: "img/a.png" }, { id: "dos", s: "2", nombre: "Dos", color: C.naranja },
   { id: "e", s: "E", nombre: "La E", color: C.rosa }, { id: "tres", s: "3", nombre: "Tres", color: C.sol },
   { id: "i", s: "I", nombre: "La I", color: C.violeta }, { id: "cuatro", s: "4", nombre: "Cuatro", color: C.azul },
   { id: "o", s: "O", nombre: "La O", color: C.coral }, { id: "cinco", s: "5", nombre: "Cinco", color: C.turquesa },
@@ -108,10 +108,31 @@ const JUEGOS = [
   { id: "colorea", nombre: "Colorea", desc: "Pinta a Uno y el prado con tus colores.", c: "#FFD6EA" },
   { id: "rompe", nombre: "Arma a Uno", desc: "Arrastra las piezas del rompecabezas.", c: "#E4DAFF" },
 ];
+const EPISODIOS = [
+  { n: 1, yt: EP1, titulo: "¡Llega el Uno!", img: "img/miniatura_ep01.jpg",
+    resumen: "Un puntito brillante cae del cielo… ¡y se dibuja un 1! Conoce a Uno, aprende cómo se escribe, busca cosas de las que hay solo una y canta su canción.",
+    aprende: ["El número <b>1</b> y la palabra <b>“uno”</b>", "Cómo se escribe el 1 (¡trázalo en el aire con tu dedito!)", "Contar: <b>un</b> sol, <b>un</b> árbol, <b>un</b> globo y <b>una</b> manzana"],
+    juegos: [["Traza el 1", "lapiz", "#juego/trazo"], ["¿Cuántos hay?", "play", "#juego/cuantos"], ["La canción del Uno", "nota", "#cancion/uno"]] },
+  { n: 2, yt: "zFOdb2WL7BM", titulo: "¡Llega la A!", img: "img/miniatura_ep02.jpg",
+    resumen: "La montañita del cielo baja al prado… ¡y se dibuja la A! Aprendemos cómo suena, cómo se escribe y buscamos cosas que empiezan con A: árbol, abeja y avión.",
+    aprende: ["La letra <b>A</b> y su sonido: <b>¡aaa!</b>", "Cómo se escribe la A: sube, baja ¡y una rayita en medio!", "Palabras con A: <b>á</b>rbol, <b>a</b>beja, <b>a</b>vión", "Repaso: el número 1"],
+    juegos: [["La canción de la A", "nota", "#cancion/a"], ["Conoce a la A", "play", "#personaje/a"]] },
+];
+const ULTIMO = EPISODIOS[EPISODIOS.length - 1];
+const CANCIONES = {
+  uno: { titulo: "La canción del Uno", ep: 1, audio: "audio/cancion_del_uno.m4a", fin: 32, letra: [
+    [8.6, "Uno, uno, tengo un puntito"], [12.8, "Uno, uno, derechito y bonito"],
+    [18.46, 'Un <b class="palabra" data-t="19.42">sol</b>, un <b class="palabra" data-t="20.44">árbol</b>, un <b class="palabra" data-t="21.54">globo</b> también'],
+    [22.92, "¡Uno, uno, lo cuento muy bien!"]] },
+  a: { titulo: "La canción de la A", ep: 2, audio: "audio/cancion_de_la_a.m4a", fin: 26, letra: [
+    [5.94, "A, a, a, la A ya llegó"], [8.64, "con forma de montaña, ¡qué bonita salió!"],
+    [13.66, '<b class="palabra" data-t="13.66">Abeja</b>, <b class="palabra" data-t="16.6">árbol</b> y <b class="palabra" data-t="17.96">avión</b>'],
+    [19.9, "¡A, a, a, qué bonita canción!"]] },
+};
 const tarjetaJuego = (j) => `<a class="juego-tarjeta" href="#juego/${j.id}"><div class="ilus" style="--c:${j.c}">${ILUS[j.id]}</div>
   <div class="txt"><h3>${j.nombre}</h3><p>${j.desc}</p></div></a>`;
 const tarjetaPersonaje = (p) => p.listo
-  ? `<a class="personaje" href="#personaje/${p.id}"><span class="insignia">¡Ya llegó!</span><div class="foto" style="--c:${p.fondo}"><img src="img/uno.png" alt="${p.nombre}" width="620" height="730"></div><h3>${p.nombre}</h3><small>${p.lema}</small></a>`
+  ? `<a class="personaje" href="#personaje/${p.id}"><span class="insignia">¡Ya llegó!</span><div class="foto" style="--c:${p.fondo}"><img src="${p.img}" alt="${p.nombre}" width="620" height="730"></div><h3>${p.nombre}</h3><small>${p.lema}</small></a>`
   : `<div class="personaje pronto" style="--c:${p.color}"><span class="insignia">Pronto</span><div class="foto"><span class="simbolo">${p.s}</span></div><h3>${p.nombre}</h3><small>Muy pronto en Cuentatún</small></div>`;
 const miga = (...pasos) => `<nav class="miga" aria-label="Estás en"><a href="#inicio">Inicio</a>${pasos.map((p) => `<span>›</span>${p}`).join("")}</nav>`;
 const pagina = (contenido) => art.append(html(`<div class="pagina">${contenido}</div>`));
@@ -141,13 +162,13 @@ const VISTAS = {
 
     <section class="seccion cielo">
       <div class="contenedor destacado">
-        <a class="video" href="#episodio/1" aria-label="Ver el episodio 1"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720" loading="lazy"><span class="play">${I.play}</span></a>
+        <a class="video" href="#episodio/${ULTIMO.n}" aria-label="Ver el episodio ${ULTIMO.n}"><img src="${ULTIMO.img}" alt="Episodio ${ULTIMO.n}: ${ULTIMO.titulo}" width="1280" height="720" loading="lazy"><span class="play">${I.play}</span></a>
         <div>
-          <span class="etiqueta">Episodio 1 · Temporada 1</span>
-          <h3>¡Llega el Uno!</h3>
-          <p>Un puntito brillante cae del cielo… ¡y se dibuja un 1! Conoce a Uno, aprende cómo se escribe y busca cosas de las que hay solo una.</p>
-          <ul class="lista-check"><li>El número 1 y la palabra “uno”</li><li>Cómo se escribe, trazándolo con el dedito</li><li>Contar: un sol, un árbol, un globo</li></ul>
-          <div class="acciones">${enlace("Ver el episodio", "play", "#episodio/1", "primario")}${enlace("Más episodios", "", "#episodios")}</div>
+          <span class="etiqueta">¡Nuevo! · Episodio ${ULTIMO.n}</span>
+          <h3>${ULTIMO.titulo}</h3>
+          <p>${ULTIMO.resumen}</p>
+          <ul class="lista-check">${ULTIMO.aprende.slice(0, 3).map((x) => `<li><span>${x}</span></li>`).join("")}</ul>
+          <div class="acciones">${enlace("Ver el episodio", "play", `#episodio/${ULTIMO.n}`, "primario")}${enlace("Más episodios", "", "#episodios")}</div>
         </div>
       </div>
     </section>
@@ -240,66 +261,47 @@ const VISTAS = {
     };
   },
 
+  "personaje/a"() {
+    pagina(`${miga('<a href="#personajes">Amigos</a>', "La A")}
+      <div class="art-con-ficha"><div>
+        <span class="etiqueta" style="background:#FFE3E0;color:${C.coral}">Personaje · Vocal</span>
+        <h1 style="margin-top:14px">La A</h1>
+        <p class="bajada">La primera letra de Cuentatún: alegre, cantarina y con forma de montañita.</p>
+        <div class="medios">${boton("Escuchar a la A", "altavoz", 'data-decir="a_hola"', "primario")}${boton("¿Cómo suena?", "altavoz", 'data-decir="a_suena"')}</div>
+        <h2>¿Cómo llegó a Cuentatún?</h2>
+        <p>Una montañita brillaba en el cielo. Se volvió estrellita, cayó al prado… ¡y se dibujó una A! Desde entonces es la mejor amiga de Uno.</p>
+        <h2>Así se escribe la A</h2>
+        <p>Subimos como una montañita… bajamos del otro lado… ¡y una rayita en medio!</p>
+        <h2>Le encantan…</h2>
+        <p>Las cosas que empiezan con A: el <b>á</b>rbol, la <b>a</b>beja y el <b>a</b>vión.</p>
+        <div class="medios">${enlace("Su canción", "nota", "#cancion/a")}${enlace("Ver su episodio", "play", "#episodio/2")}</div>
+      </div>
+      <aside class="ficha">
+        <div class="ficha-img" style="background:radial-gradient(circle at 50% 60%, #FFE9E6, #FFCFC8)"><img src="img/a.png" alt="La A, una A color coral con carita feliz y un arbolito en la pancita" width="552" height="733"></div>
+        <div class="ficha-titulo">La A</div>
+        <table>
+          <tr><th>Es la letra</th><td><b style="font-size:20px;color:${C.coral}">A</b> (vocal)</td></tr>
+          <tr><th>Suena</th><td>¡aaa!</td></tr>
+          <tr><th>En su pancita</th><td>Un arbolito 🌳</td></tr>
+          <tr><th>Color</th><td>Coral</td></tr>
+          <tr><th>Su mejor amigo</th><td><a href="#personaje/uno">Uno</a></td></tr>
+          <tr><th>Episodio</th><td><a href="#episodio/2">¡Llega la A!</a></td></tr>
+        </table>
+      </aside></div>`);
+  },
+
   episodios() {
     pagina(`${miga("Episodios")}<h1>Temporada 1</h1>
       <p class="bajada">Los números del 1 al 5 y las vocales A, E, I, O, U. Cada episodio repasa a todos los amigos anteriores.</p>
-      <div class="destacado" style="margin-top:34px">
-        <a class="video" href="#episodio/1" aria-label="Ver el episodio 1"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720"><span class="play">${I.play}</span></a>
-        <div><span class="etiqueta">Episodio 1</span><h3>¡Llega el Uno!</h3>
-          <p>Un puntito brillante cae del cielo y se dibuja un 1. Aprendemos cómo se escribe, buscamos cosas de las que hay solo una y cantamos la canción del Uno.</p>
-          <div class="acciones">${enlace("Ver el episodio", "play", "#episodio/1", "primario")}${enlace("Seguir en YouTube", "yt", SEGUIR)}</div></div>
-      </div>
+      <div class="rejilla" style="margin-top:30px">${EPISODIOS.slice().reverse().map((e) => `<a class="juego-tarjeta" href="#episodio/${e.n}"><img src="${e.img}" alt="" width="1280" height="720" style="aspect-ratio:16/9;object-fit:cover"><div class="txt"><h3>Episodio ${e.n}: ${e.titulo}</h3></div></a>`).join("")}</div>
       <h2>Próximamente</h2>
-      <div class="rejilla">${PERSONAJES.slice(1).map((p, i) => `<div class="personaje pronto" style="--c:${p.color}"><div class="foto" style="height:120px"><span class="simbolo" style="font-size:64px">${p.s}</span></div><h3 style="font-size:18px">Episodio ${i + 2}</h3><small>Llega ${p.nombre.toLowerCase().startsWith("la") ? p.nombre.toLowerCase() : "el " + p.nombre}</small></div>`).join("")}</div>`);
-  },
-
-  "episodio/1"() {
-    pagina(`${miga('<a href="#episodios">Episodios</a>', "Episodio 1")}
-      <span class="etiqueta">Episodio 1 · Temporada 1</span><h1 style="margin-top:14px">¡Llega el Uno!</h1>
-      <p class="bajada">Un puntito brillante cae del cielo… ¡y se dibuja un 1! Conoce a Uno, aprende cómo se escribe, busca cosas de las que hay solo una y canta su canción.</p>
-      <button class="video reproductor" id="reproducir" style="max-width:760px;margin-top:24px;border:0;padding:0;cursor:pointer;width:100%" aria-label="Reproducir el episodio"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720"><span class="play">${I.play}</span></button>
-      <p class="aviso" style="margin-top:12px;max-width:760px">El video se reproduce desde YouTube (modo de privacidad mejorada) solo cuando presionas play. También puedes <a href="${YT_EP1}" rel="noopener">verlo en YouTube</a>.</p>
-      <h2>Qué aprendemos</h2>
-      <ul class="lista-check"><li>El número <b>1</b> y la palabra <b>“uno”</b></li><li>Cómo se escribe el 1 (¡trázalo en el aire con tu dedito!)</li><li>Contar: <b>un</b> sol, <b>un</b> árbol, <b>un</b> globo y <b>una</b> manzana</li></ul>
-      <h2>Para seguir jugando</h2>
-      <div class="medios">${enlace("Traza el 1", "lapiz", "#juego/trazo")}${enlace("¿Cuántos hay?", "play", "#juego/cuantos")}${enlace("La canción del Uno", "nota", "#cancion/uno")}</div>`);
-    $("#reproducir").onclick = (ev) => {
-      const caja = ev.currentTarget, f = document.createElement("iframe");
-      f.src = `https://www.youtube-nocookie.com/embed/${EP1}?autoplay=1&rel=0&modestbranding=1`;
-      f.title = "¡Llega el Uno! · Cuentatún"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
-      f.style.cssText = "width:100%;aspect-ratio:16/9;border:0;display:block;border-radius:22px";
-      caja.replaceWith(f);
-    };
+      <div class="rejilla">${PERSONAJES.slice(EPISODIOS.length).map((p, i) => `<div class="personaje pronto" style="--c:${p.color}"><div class="foto" style="height:120px"><span class="simbolo" style="font-size:64px">${p.s}</span></div><h3 style="font-size:18px">Episodio ${i + EPISODIOS.length + 1}</h3><small>Llega ${p.nombre.startsWith("La ") ? "la " + p.s : "el " + p.nombre}</small></div>`).join("")}</div>`);
   },
 
   canciones() {
     pagina(`${miga("Canciones")}<h1>Canciones de Cuentatún</h1>
       <p class="bajada">Canciones originales para cantar y contar.</p>
-      <div class="rejilla" style="margin-top:30px">
-        <a class="juego-tarjeta" href="#cancion/uno"><div class="ilus" style="--c:#DCD2FF">${ILUS.puntitos}</div><div class="txt"><h3>La canción del Uno</h3><p>Episodio 1</p></div></a>
-        <div class="juego-tarjeta" style="opacity:.55"><div class="ilus" style="--c:#FFD3CF"><span style="font-family:var(--titulo);font-size:70px;color:#fff">A</span></div><div class="txt"><h3>La canción de la A</h3><p>Muy pronto</p></div></div>
-      </div>`);
-  },
-
-  "cancion/uno"() {
-    const LETRA = [
-      [8.6, "Uno, uno, tengo un puntito"], [12.8, "Uno, uno, derechito y bonito"],
-      [18.46, 'Un <b class="palabra" data-t="19.42">sol</b>, un <b class="palabra" data-t="20.44">árbol</b>, un <b class="palabra" data-t="21.54">globo</b> también'],
-      [22.92, "¡Uno, uno, lo cuento muy bien!"],
-    ];
-    pagina(`${miga('<a href="#canciones">Canciones</a>', "La canción del Uno")}
-      <span class="etiqueta">Canción · Episodio 1</span><h1 style="margin-top:14px">La canción del Uno</h1>
-      <p class="bajada">¡Canta con Uno! La letra se ilumina mientras suena.</p>
-      <audio id="cancion" controls preload="none" src="audio/cancion_del_uno.m4a"></audio>
-      <div class="karaoke" id="letra">${LETRA.map(([t, l]) => `<div data-t="${t}">${l}</div>`).join("")}</div>`);
-    const au = $("#cancion"), lineas = [...art.querySelectorAll("#letra > div")], palabras = [...art.querySelectorAll(".palabra")];
-    au.addEventListener("play", () => callar());
-    au.addEventListener("timeupdate", () => {
-      const t = au.currentTime;
-      lineas.forEach((d, i) => d.classList.toggle("ahora", t >= +d.dataset.t && (i === lineas.length - 1 ? t < 32 : t < +lineas[i + 1].dataset.t)));
-      palabras.forEach((p) => p.classList.toggle("ahora", t >= +p.dataset.t && t < +p.dataset.t + 0.9));
-    });
-    limpiarJuego = () => au.pause();
+      <div class="rejilla" style="margin-top:30px">${Object.entries(CANCIONES).map(([id, c]) => `<a class="juego-tarjeta" href="#cancion/${id}"><div class="ilus" style="--c:${id === "a" ? "#FFD3CF" : "#DCD2FF"}">${id === "a" ? '<span style="font-family:var(--titulo);font-size:70px;color:#fff">A</span>' : ILUS.puntitos}</div><div class="txt"><h3>${c.titulo}</h3><p>Episodio ${c.ep}</p></div></a>`).join("")}</div>`);
   },
 
   juegos() {
@@ -325,6 +327,8 @@ const VISTAS = {
   },
 
   "juego/puntitos": () => juegoPuntitos(),
+  ...Object.fromEntries(EPISODIOS.map((e) => [`episodio/${e.n}`, () => vistaEpisodio(e)])),
+  ...Object.fromEntries(Object.keys(CANCIONES).map((id) => [`cancion/${id}`, () => vistaCancion(id)])),
   "juego/cuantos": () => juegoCuantos(),
   "juego/trazo": () => juegoTrazo(),
   "juego/globos": () => juegoGlobos(),
@@ -334,6 +338,38 @@ const VISTAS = {
   "juego/colorea": () => juegoColorea(),
   "juego/rompe": () => juegoRompe(),
 };
+
+function vistaEpisodio(e) {
+  pagina(`${miga('<a href="#episodios">Episodios</a>', `Episodio ${e.n}`)}
+    <span class="etiqueta">Episodio ${e.n} · Temporada 1</span><h1 style="margin-top:14px">${e.titulo}</h1>
+    <p class="bajada">${e.resumen}</p>
+    <button class="video reproductor" id="reproducir" style="max-width:760px;margin-top:24px;border:0;padding:0;cursor:pointer;width:100%" aria-label="Reproducir el episodio"><img src="${e.img}" alt="Episodio ${e.n}: ${e.titulo}" width="1280" height="720"><span class="play">${I.play}</span></button>
+    <p class="aviso" style="margin-top:12px;max-width:760px">El video se reproduce desde YouTube (modo de privacidad mejorada) solo cuando presionas play. También puedes <a href="https://youtu.be/${e.yt}" rel="noopener">verlo en YouTube</a>.</p>
+    <h2>Qué aprendemos</h2><ul class="lista-check">${e.aprende.map((x) => `<li><span>${x}</span></li>`).join("")}</ul>
+    <h2>Para seguir jugando</h2><div class="medios">${e.juegos.map(([t, i, h]) => enlace(t, i, h)).join("")}</div>`);
+  $("#reproducir").onclick = (ev) => {
+    const f = document.createElement("iframe");
+    f.src = `https://www.youtube-nocookie.com/embed/${e.yt}?autoplay=1&rel=0&modestbranding=1`; f.title = `${e.titulo} · Cuentatún`;
+    f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+    f.style.cssText = "width:100%;aspect-ratio:16/9;border:0;display:block;border-radius:22px"; ev.currentTarget.replaceWith(f);
+  };
+}
+function vistaCancion(id) {
+  const c = CANCIONES[id];
+  pagina(`${miga('<a href="#canciones">Canciones</a>', c.titulo)}
+    <span class="etiqueta">Canción · Episodio ${c.ep}</span><h1 style="margin-top:14px">${c.titulo}</h1>
+    <p class="bajada">¡A cantar! La letra se ilumina mientras suena.</p>
+    <audio id="cancion" controls preload="none" src="${c.audio}"></audio>
+    <div class="karaoke" id="letra">${c.letra.map(([t, l]) => `<div data-t="${t}">${l}</div>`).join("")}</div>`);
+  const au = $("#cancion"), lineas = [...art.querySelectorAll("#letra > div")], palabras = [...art.querySelectorAll(".palabra")];
+  au.addEventListener("play", () => callar());
+  au.addEventListener("timeupdate", () => {
+    const t = au.currentTime;
+    lineas.forEach((d, i) => d.classList.toggle("ahora", t >= +d.dataset.t && (i === lineas.length - 1 ? t < c.fin : t < +lineas[i + 1].dataset.t)));
+    palabras.forEach((p) => p.classList.toggle("ahora", t >= +p.dataset.t && t < +p.dataset.t + 0.9));
+  });
+  limpiarJuego = () => au.pause();
+}
 
 /* ================= navegación ================= */
 let limpiarJuego = null;
