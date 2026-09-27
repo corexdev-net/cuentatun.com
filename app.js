@@ -6,6 +6,8 @@ const C = { marino: "#1B2A6B", coral: "#FF5A4E", sol: "#FFC21A", turquesa: "#14B
             rosa: "#FF6FAE", naranja: "#FF8A1F", azul: "#3D8BFF" };
 const art = $("#articulo");
 const YT = "https://www.youtube.com/@Cuentatun";
+const EP1 = "-1qzkLmKuIw";                          // episodio 1 en YouTube
+const YT_EP1 = `https://youtu.be/${EP1}`;
 const azar = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
 const html = (s) => { const t = document.createElement("template"); t.innerHTML = s.trim(); return t.content; };
 
@@ -138,13 +140,13 @@ const VISTAS = {
 
     <section class="seccion cielo">
       <div class="contenedor destacado">
-        <a class="video" href="${YT}" rel="noopener" aria-label="Ver el episodio 1 en YouTube"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720" loading="lazy"><span class="play">${I.play}</span></a>
+        <a class="video" href="#episodio/1" aria-label="Ver el episodio 1"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720" loading="lazy"><span class="play">${I.play}</span></a>
         <div>
           <span class="etiqueta">Episodio 1 · Temporada 1</span>
           <h3>¡Llega el Uno!</h3>
           <p>Un puntito brillante cae del cielo… ¡y se dibuja un 1! Conoce a Uno, aprende cómo se escribe y busca cosas de las que hay solo una.</p>
           <ul class="lista-check"><li>El número 1 y la palabra “uno”</li><li>Cómo se escribe, trazándolo con el dedito</li><li>Contar: un sol, un árbol, un globo</li></ul>
-          <div class="acciones">${enlace("Ver en YouTube", "yt", YT, "primario")}${enlace("Más episodios", "", "#episodios")}</div>
+          <div class="acciones">${enlace("Ver el episodio", "play", "#episodio/1", "primario")}${enlace("Más episodios", "", "#episodios")}</div>
         </div>
       </div>
     </section>
@@ -232,10 +234,10 @@ const VISTAS = {
     pagina(`${miga("Episodios")}<h1>Temporada 1</h1>
       <p class="bajada">Los números del 1 al 5 y las vocales A, E, I, O, U. Cada episodio repasa a todos los amigos anteriores.</p>
       <div class="destacado" style="margin-top:34px">
-        <a class="video" href="${YT}" rel="noopener" aria-label="Ver el episodio 1 en YouTube"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720"><span class="play">${I.play}</span></a>
+        <a class="video" href="#episodio/1" aria-label="Ver el episodio 1"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720"><span class="play">${I.play}</span></a>
         <div><span class="etiqueta">Episodio 1</span><h3>¡Llega el Uno!</h3>
           <p>Un puntito brillante cae del cielo y se dibuja un 1. Aprendemos cómo se escribe, buscamos cosas de las que hay solo una y cantamos la canción del Uno.</p>
-          <div class="acciones">${enlace("Ver en YouTube", "yt", YT, "primario")}${enlace("Detalles", "", "#episodio/1")}</div></div>
+          <div class="acciones">${enlace("Ver el episodio", "play", "#episodio/1", "primario")}${enlace("En YouTube", "yt", YT_EP1)}</div></div>
       </div>
       <h2>Próximamente</h2>
       <div class="rejilla">${PERSONAJES.slice(1).map((p, i) => `<div class="personaje pronto" style="--c:${p.color}"><div class="foto" style="height:120px"><span class="simbolo" style="font-size:64px">${p.s}</span></div><h3 style="font-size:18px">Episodio ${i + 2}</h3><small>Llega ${p.nombre.toLowerCase().startsWith("la") ? p.nombre.toLowerCase() : "el " + p.nombre}</small></div>`).join("")}</div>`);
@@ -245,11 +247,19 @@ const VISTAS = {
     pagina(`${miga('<a href="#episodios">Episodios</a>', "Episodio 1")}
       <span class="etiqueta">Episodio 1 · Temporada 1</span><h1 style="margin-top:14px">¡Llega el Uno!</h1>
       <p class="bajada">Un puntito brillante cae del cielo… ¡y se dibuja un 1! Conoce a Uno, aprende cómo se escribe, busca cosas de las que hay solo una y canta su canción.</p>
-      <a class="video" href="${YT}" rel="noopener" style="max-width:760px;margin-top:24px" aria-label="Ver en YouTube"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720"><span class="play">${I.play}</span></a>
+      <button class="video reproductor" id="reproducir" style="max-width:760px;margin-top:24px;border:0;padding:0;cursor:pointer;width:100%" aria-label="Reproducir el episodio"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720"><span class="play">${I.play}</span></button>
+      <p class="aviso" style="margin-top:12px;max-width:760px">El video se reproduce desde YouTube (modo de privacidad mejorada) solo cuando presionas play. También puedes <a href="${YT_EP1}" rel="noopener">verlo en YouTube</a>.</p>
       <h2>Qué aprendemos</h2>
       <ul class="lista-check"><li>El número <b>1</b> y la palabra <b>“uno”</b></li><li>Cómo se escribe el 1 (¡trázalo en el aire con tu dedito!)</li><li>Contar: <b>un</b> sol, <b>un</b> árbol, <b>un</b> globo y <b>una</b> manzana</li></ul>
       <h2>Para seguir jugando</h2>
       <div class="medios">${enlace("Traza el 1", "lapiz", "#juego/trazo")}${enlace("¿Cuántos hay?", "play", "#juego/cuantos")}${enlace("La canción del Uno", "nota", "#cancion/uno")}</div>`);
+    $("#reproducir").onclick = (ev) => {
+      const caja = ev.currentTarget, f = document.createElement("iframe");
+      f.src = `https://www.youtube-nocookie.com/embed/${EP1}?autoplay=1&rel=0&modestbranding=1`;
+      f.title = "¡Llega el Uno! · Cuentatún"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+      f.style.cssText = "width:100%;aspect-ratio:16/9;border:0;display:block;border-radius:22px";
+      caja.replaceWith(f);
+    };
   },
 
   canciones() {
