@@ -77,7 +77,7 @@ function confeti(n = 90) {
 /* ================= datos ================= */
 const PERSONAJES = [
   { id: "uno", s: "1", nombre: "Uno", color: C.turquesa, fondo: "#DDF6F4", listo: true, lema: "¡Yo tengo un puntito!", img: "img/uno.png" },
-  { id: "a", s: "A", nombre: "La A", color: C.coral, fondo: "#FFE0DC", listo: true, lema: "¡Yo hago aaa!", img: "img/a.png" }, { id: "dos", s: "2", nombre: "Dos", color: C.naranja },
+  { id: "a", s: "A", nombre: "La A", color: C.coral, fondo: "#FFE0DC", listo: true, lema: "¡Yo hago aaa!", img: "img/a.png" }, { id: "dos", s: "2", nombre: "Dos", color: C.naranja, fondo: "#FFE6CF", listo: true, lema: "¡Me encanta hacer todo en pareja!", img: "img/dos.png" },
   { id: "e", s: "E", nombre: "La E", color: C.rosa }, { id: "tres", s: "3", nombre: "Tres", color: C.sol },
   { id: "i", s: "I", nombre: "La I", color: C.violeta }, { id: "cuatro", s: "4", nombre: "Cuatro", color: C.azul },
   { id: "o", s: "O", nombre: "La O", color: C.coral }, { id: "cinco", s: "5", nombre: "Cinco", color: C.turquesa },
@@ -117,6 +117,10 @@ const EPISODIOS = [
     resumen: "La montañita del cielo baja al prado… ¡y se dibuja la A! Aprendemos cómo suena, cómo se escribe y buscamos cosas que empiezan con A: árbol, abeja y avión.",
     aprende: ["La letra <b>A</b> y su sonido: <b>¡aaa!</b>", "Cómo se escribe la A: sube, baja ¡y una rayita en medio!", "Palabras con A: <b>á</b>rbol, <b>a</b>beja, <b>a</b>vión", "Repaso: el número 1"],
     juegos: [["La canción de la A", "nota", "#cancion/a"], ["Conoce a la A", "play", "#personaje/a"]] },
+  { n: 3, yt: "h3kX3u8lR64", titulo: "¡Llega Dos!", img: "img/miniatura_ep03.jpg",
+    resumen: "Un amigo nuevo con dos puntitos dorados cae del cielo… ¡y se dibuja un 2! Contamos sus puntitos, aprendemos a escribir el 2 y contamos zapatos, pajaritos y manzanas.",
+    aprende: ["El número <b>2</b> y la palabra <b>“dos”</b>", "Contar hasta dos: <b>uno, dos</b>", "Cómo se escribe el 2: curvita, bajamos en diagonal ¡y una rayita!", "Repaso: Uno y la A"],
+    juegos: [["La canción de Dos", "nota", "#cancion/dos"], ["Conoce a Dos", "play", "#personaje/dos"], ["¿Cuántos hay?", "play", "#juego/cuantos"]] },
 ];
 const ULTIMO = EPISODIOS[EPISODIOS.length - 1];
 const CANCIONES = {
@@ -128,7 +132,40 @@ const CANCIONES = {
     [5.94, "A, a, a, la A ya llegó"], [8.64, "con forma de montaña, ¡qué bonita salió!"],
     [13.66, '<b class="palabra" data-t="13.66">Abeja</b>, <b class="palabra" data-t="16.6">árbol</b> y <b class="palabra" data-t="17.96">avión</b>'],
     [19.9, "¡A, a, a, qué bonita canción!"]] },
+  dos: { titulo: "La canción de Dos", ep: 3, audio: "audio/cancion_del_dos.m4a", fin: 25.9, letra: [
+    [3.92, "Dos, dos, dos, el número dos llegó,"], [8.54, "con dos puntitos, ¡qué bonito salió!"],
+    [13.62, 'Dos <b class="palabra" data-t="14.76">zapatos</b>, dos <b class="palabra" data-t="17.18">pajaritos</b>,'],
+    [18.46, "¡dos, dos, dos, cuéntalos conmigo!"]] },
 };
+// fichas de los amigos nuevos (la de Uno y la de la A están escritas a mano más abajo)
+const FICHAS = {
+  dos: { tipo: "Número", bajada: "El tercer amigo de Cuentatún: juguetón y le encanta hacer todo en pareja.", ep: 3,
+    voces: [["Escuchar a Dos", "d_hola"], ["Contar sus puntitos", "d_puntitos"]],
+    llego: "Dos puntitos dorados brillaban en el cielo. Se juntaron en una estrellita que cayó al prado… ¡y se dibujó un 2!",
+    escribe: "Hacemos una curvita… bajamos en diagonal… ¡y una rayita derechita!",
+    gusta: "Las cosas que vienen en pareja: <b>dos</b> zapatos, <b>dos</b> pajaritos y <b>dos</b> manzanas.",
+    filas: [["Es el número", '<b style="font-size:20px">2</b> (dos)'], ["Puntitos", '<span class="puntito"></span><span class="puntito"></span> dos'], ["Color", "Naranja"], ["Su frase", "“¡Me encanta hacer todo en pareja!”"]] },
+};
+function vistaFicha(id) {
+  const p = PERSONAJES.find((x) => x.id === id), f = FICHAS[id], e = EPISODIOS.find((x) => x.n === f.ep);
+  pagina(`${miga('<a href="#personajes">Amigos</a>', p.nombre)}
+    <div class="art-con-ficha"><div>
+      <span class="etiqueta" style="background:${p.fondo};color:${p.color}">Personaje · ${f.tipo}</span>
+      <h1 style="margin-top:14px">${p.nombre}</h1>
+      <p class="bajada">${f.bajada}</p>
+      <div class="medios">${f.voces.map(([t, a], i) => boton(t, "altavoz", `data-decir="${a}"`, i === 0 ? "primario" : "")).join("")}</div>
+      <h2>¿Cómo llegó a Cuentatún?</h2><p>${f.llego}</p>
+      <h2>Así se escribe ${f.tipo === "Número" ? "el " + p.s : "la " + p.s}</h2><p>${f.escribe}</p>
+      <h2>Le encanta…</h2><p>${f.gusta}</p>
+      <div class="medios">${enlace("Su canción", "nota", `#cancion/${id}`)}${e ? enlace("Ver su episodio", "play", `#episodio/${e.n}`) : ""}</div>
+    </div>
+    <aside class="ficha">
+      <div class="ficha-img" style="background:radial-gradient(circle at 50% 60%, #fff, ${p.fondo})"><img src="${p.img}" alt="${p.nombre}, personaje de Cuentatún" width="560" height="714"></div>
+      <div class="ficha-titulo">${p.nombre}</div>
+      <table>${f.filas.map(([a, b]) => `<tr><th>${a}</th><td>${b}</td></tr>`).join("")}
+        ${e ? `<tr><th>Episodio</th><td><a href="#episodio/${e.n}">${e.titulo}</a></td></tr>` : ""}</table>
+    </aside></div>`);
+}
 const tarjetaJuego = (j) => `<a class="juego-tarjeta" href="#juego/${j.id}"><div class="ilus" style="--c:${j.c}">${ILUS[j.id]}</div>
   <div class="txt"><h3>${j.nombre}</h3><p>${j.desc}</p></div></a>`;
 const tarjetaPersonaje = (p) => p.listo
@@ -329,6 +366,7 @@ const VISTAS = {
   "juego/puntitos": () => juegoPuntitos(),
   ...Object.fromEntries(EPISODIOS.map((e) => [`episodio/${e.n}`, () => vistaEpisodio(e)])),
   ...Object.fromEntries(Object.keys(CANCIONES).map((id) => [`cancion/${id}`, () => vistaCancion(id)])),
+  ...Object.fromEntries(Object.keys(FICHAS).map((id) => [`personaje/${id}`, () => vistaFicha(id)])),
   "juego/cuantos": () => juegoCuantos(),
   "juego/trazo": () => juegoTrazo(),
   "juego/globos": () => juegoGlobos(),
