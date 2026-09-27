@@ -78,10 +78,12 @@ function confeti(n = 90) {
 const PERSONAJES = [
   { id: "uno", s: "1", nombre: "Uno", color: C.turquesa, fondo: "#DDF6F4", listo: true, lema: "¡Yo tengo un puntito!", img: "img/uno.png" },
   { id: "a", s: "A", nombre: "La A", color: C.coral, fondo: "#FFE0DC", listo: true, lema: "¡Yo hago aaa!", img: "img/a.png" }, { id: "dos", s: "2", nombre: "Dos", color: C.naranja, fondo: "#FFE6CF", listo: true, lema: "¡Me encanta hacer todo en pareja!", img: "img/dos.png" },
-  { id: "e", s: "E", nombre: "La E", color: C.rosa }, { id: "tres", s: "3", nombre: "Tres", color: C.sol },
-  { id: "i", s: "I", nombre: "La I", color: C.violeta }, { id: "cuatro", s: "4", nombre: "Cuatro", color: C.azul },
-  { id: "o", s: "O", nombre: "La O", color: C.coral }, { id: "cinco", s: "5", nombre: "Cinco", color: C.turquesa },
-  { id: "u", s: "U", nombre: "La U", color: C.naranja },
+  { id: "e", s: "E", nombre: "La E", color: C.rosa, fondo: "#FFE1EF", listo: true, lema: "¡Yo hago eee!", img: "img/e.png" },
+  { id: "tres", s: "3", nombre: "Tres", color: "#E0A100", fondo: "#FFF1C7", listo: true, lema: "¡Me encantan las aventuras!", img: "img/tres.png" },
+  { id: "i", s: "I", nombre: "La I", color: C.violeta, fondo: "#ECE4FF", listo: true, lema: "¡Yo hago iii!", img: "img/i.png" },
+  { id: "cuatro", s: "4", nombre: "Cuatro", color: C.azul },
+  { id: "o", s: "O", nombre: "La O", color: "#FF9E7A" }, { id: "cinco", s: "5", nombre: "Cinco", color: "#44CC55" },
+  { id: "u", s: "U", nombre: "La U", color: "#C757E8" },
 ];
 const ILUS = {   // ilustraciones propias de cada juego
   puntitos: `<svg viewBox="0 0 120 90"><defs><radialGradient id="dg" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="#FFF3B8"/><stop offset=".45" stop-color="#FFC83A"/><stop offset="1" stop-color="#E0A000"/></radialGradient></defs>
@@ -121,6 +123,18 @@ const EPISODIOS = [
     resumen: "Un amigo nuevo con dos puntitos dorados cae del cielo… ¡y se dibuja un 2! Contamos sus puntitos, aprendemos a escribir el 2 y contamos zapatos, pajaritos y manzanas.",
     aprende: ["El número <b>2</b> y la palabra <b>“dos”</b>", "Contar hasta dos: <b>uno, dos</b>", "Cómo se escribe el 2: curvita, bajamos en diagonal ¡y una rayita!", "Repaso: Uno y la A"],
     juegos: [["La canción de Dos", "nota", "#cancion/dos"], ["Conoce a Dos", "play", "#personaje/dos"], ["¿Cuántos hay?", "play", "#juego/cuantos"]] },
+  { n: 4, yt: "BjcVB_g2LTE", titulo: "¡Llega la E!", img: "img/miniatura_ep04.jpg",
+    resumen: "Una letra con tres rayitas y una estrellita baja del cielo… ¡y se dibuja la E! Aprendemos cómo suena, cómo se escribe y buscamos cosas que empiezan con E: estrella, elefante y escalera.",
+    aprende: ["La letra <b>E</b> y su sonido: <b>¡eee!</b>", "Cómo se escribe la E: una raya hacia abajo y tres rayitas", "Palabras con E: <b>e</b>strella, <b>e</b>lefante, <b>e</b>scalera", "Repaso: Uno, la A y Dos"],
+    juegos: [["La canción de la E", "nota", "#cancion/e"], ["Conoce a la E", "play", "#personaje/e"]] },
+  { n: 5, yt: "hO9z5ShcEfc", titulo: "¡Llega Tres!", img: "img/miniatura_ep05.jpg",
+    resumen: "Llega un amigo valiente con tres puntitos dorados: ¡Tres! Contamos sus puntitos, aprendemos a escribir el 3 y contamos mariposas, flores y piedritas del camino.",
+    aprende: ["El número <b>3</b> y la palabra <b>“tres”</b>", "Contar hasta tres: <b>uno, dos, tres</b>", "Cómo se escribe el 3: una pancita arriba y otra abajo", "Repaso: Uno, la A, Dos y la E"],
+    juegos: [["La canción de Tres", "nota", "#cancion/tres"], ["Conoce a Tres", "play", "#personaje/tres"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
+  { n: 6, yt: "-hz4-ekHU1Y", titulo: "¡Llega la I!", img: "img/miniatura_ep06.jpg",
+    resumen: "Una amiga alta y flaquita llega a Cuentatún: ¡la I! Aprendemos cómo suena, cómo se escribe y buscamos cosas que empiezan con I: iguana, isla e iglú.",
+    aprende: ["La letra <b>I</b> y su sonido: <b>¡iii!</b>", "Cómo se escribe la I: ¡una raya derechita hacia abajo!", "Palabras con I: <b>i</b>guana, <b>i</b>sla, <b>i</b>glú", "Repaso: Uno, la A, Dos, la E y Tres"],
+    juegos: [["La canción de la I", "nota", "#cancion/i"], ["Conoce a la I", "play", "#personaje/i"]] },
 ];
 const ULTIMO = EPISODIOS[EPISODIOS.length - 1];
 const CANCIONES = {
@@ -136,6 +150,18 @@ const CANCIONES = {
     [3.92, "Dos, dos, dos, el número dos llegó,"], [8.54, "con dos puntitos, ¡qué bonito salió!"],
     [13.62, 'Dos <b class="palabra" data-t="14.76">zapatos</b>, dos <b class="palabra" data-t="17.18">pajaritos</b>,'],
     [18.46, "¡dos, dos, dos, cuéntalos conmigo!"]] },
+  e: { titulo: "La canción de la E", ep: 4, audio: "audio/cancion_e.m4a", fin: 24.6, letra: [
+    [3.72, "E, e, e, la E ya llegó,"], [8.48, "con sus tres rayitas, ¡qué bonita salió!"],
+    [13.54, '<b class="palabra" data-t="13.54">Estrella</b>, <b class="palabra" data-t="16.3">elefante</b> y <b class="palabra" data-t="17.56">escalera</b>,'],
+    [18.46, "¡E, e, e, canta la E entera!"]] },
+  tres: { titulo: "La canción de Tres", ep: 5, audio: "audio/cancion_tres.m4a", fin: 29.4, letra: [
+    [9.2, "Tres, tres, tres, el número tres llegó,"], [13.84, "con tres puntitos, ¡qué valiente salió!"],
+    [19.12, 'Tres <b class="palabra" data-t="19.74">mariposas</b>, tres <b class="palabra" data-t="22.64">flores</b>,'],
+    [23.92, "¡tres, tres, tres, de muchos colores!"]] },
+  i: { titulo: "La canción de la I", ep: 6, audio: "audio/cancion_i.m4a", fin: 24.84, letra: [
+    [4.18, "I, i, i, la I ya llegó,"], [8.92, "alta y flaquita, ¡qué bonita salió!"],
+    [13.88, '<b class="palabra" data-t="13.88">Iguana</b>, <b class="palabra" data-t="15.72">isla</b> y un <b class="palabra" data-t="17.47">iglú</b>,'],
+    [18.56, "¡i, i, i, canta tú!"]] },
 };
 // fichas de los amigos nuevos (la de Uno y la de la A están escritas a mano más abajo)
 const FICHAS = {
@@ -145,6 +171,24 @@ const FICHAS = {
     escribe: "Hacemos una curvita… bajamos en diagonal… ¡y una rayita derechita!",
     gusta: "Las cosas que vienen en pareja: <b>dos</b> zapatos, <b>dos</b> pajaritos y <b>dos</b> manzanas.",
     filas: [["Es el número", '<b style="font-size:20px">2</b> (dos)'], ["Puntitos", '<span class="puntito"></span><span class="puntito"></span> dos'], ["Color", "Naranja"], ["Su frase", "“¡Me encanta hacer todo en pareja!”"]] },
+  e: { tipo: "Vocal", bajada: "Alegre y brillante: le encanta mirar las estrellas.", ep: 4,
+    voces: [["Escuchar a la E", "e_hola"], ["¿Cómo suena?", "e_suena"]],
+    llego: "Una letra con tres rayitas y una estrellita brillaba en el cielo. Cayó al prado… ¡y se dibujó la E!",
+    escribe: "Una raya derechita hacia abajo… una rayita arriba… una en medio… ¡y otra abajo!",
+    gusta: "Las cosas que empiezan con E: la <b>e</b>strella, el <b>e</b>lefante y la <b>e</b>scalera.",
+    filas: [["Es la letra", '<b style="font-size:20px">E</b> (vocal)'], ["Suena", "¡eee!"], ["En su pancita", "Una estrellita ⭐"], ["Color", "Rosa"]] },
+  tres: { tipo: "Número", bajada: "Valiente y aventurero: siempre quiere explorar el prado.", ep: 5,
+    voces: [["Escuchar a Tres", "t_hola"], ["Contar sus puntitos", "t_puntitos"]],
+    llego: "Tres puntitos dorados brillaban en el cielo. Se juntaron en una estrellita que cayó al prado… ¡y se dibujó un 3!",
+    escribe: "Hacemos una pancita arriba… ¡y otra pancita abajo!",
+    gusta: "Contar hasta tres: <b>tres</b> mariposas, <b>tres</b> flores y <b>tres</b> piedritas del camino.",
+    filas: [["Es el número", '<b style="font-size:20px">3</b> (tres)'], ["Puntitos", '<span class="puntito"></span><span class="puntito"></span><span class="puntito"></span> tres'], ["Color", "Amarillo sol"], ["Su frase", "“¡Me encantan las aventuras!”"]] },
+  i: { tipo: "Vocal", bajada: "Alta y flaquita, un poquito tímida pero muy curiosa.", ep: 6,
+    voces: [["Escuchar a la I", "i_hola"], ["¿Cómo suena?", "i_suena"]],
+    llego: "Una letra alta y flaquita brillaba en el cielo. Cayó al prado… ¡y se dibujó la I!",
+    escribe: "Una raya derechita hacia abajo… ¡y listo! ¡Así de fácil!",
+    gusta: "Las cosas que empiezan con I: la <b>i</b>guana, la <b>i</b>sla y el <b>i</b>glú.",
+    filas: [["Es la letra", '<b style="font-size:20px">I</b> (vocal)'], ["Suena", "¡iii!"], ["En su pancita", "Una iguanita 🦎"], ["Color", "Violeta"]] },
 };
 function vistaFicha(id) {
   const p = PERSONAJES.find((x) => x.id === id), f = FICHAS[id], e = EPISODIOS.find((x) => x.n === f.ep);
@@ -338,7 +382,7 @@ const VISTAS = {
   canciones() {
     pagina(`${miga("Canciones")}<h1>Canciones de Cuentatún</h1>
       <p class="bajada">Canciones originales para cantar y contar.</p>
-      <div class="rejilla" style="margin-top:30px">${Object.entries(CANCIONES).map(([id, c]) => `<a class="juego-tarjeta" href="#cancion/${id}"><div class="ilus" style="--c:${id === "a" ? "#FFD3CF" : "#DCD2FF"}">${id === "a" ? '<span style="font-family:var(--titulo);font-size:70px;color:#fff">A</span>' : ILUS.puntitos}</div><div class="txt"><h3>${c.titulo}</h3><p>Episodio ${c.ep}</p></div></a>`).join("")}</div>`);
+      <div class="rejilla" style="margin-top:30px">${Object.entries(CANCIONES).map(([id, c]) => { const p = PERSONAJES.find((x) => x.id === id); return `<a class="juego-tarjeta" href="#cancion/${id}"><div class="ilus" style="--c:${id === "uno" ? "#DCD2FF" : p.color}">${id === "uno" ? ILUS.puntitos : `<span style="font-family:var(--titulo);font-size:70px;color:#fff">${p.s}</span>`}</div><div class="txt"><h3>${c.titulo}</h3><p>Episodio ${c.ep}</p></div></a>`; }).join("")}</div>`);
   },
 
   juegos() {
