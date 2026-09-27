@@ -6,6 +6,7 @@ const C = { marino: "#1B2A6B", coral: "#FF5A4E", sol: "#FFC21A", turquesa: "#14B
             rosa: "#FF6FAE", naranja: "#FF8A1F", azul: "#3D8BFF" };
 const art = $("#articulo");
 const YT = "https://www.youtube.com/@Cuentatun";
+const SEGUIR = "https://www.youtube.com/@Cuentatun?sub_confirmation=1";   // abre YouTube con la ventana de "Suscribirse"
 const EP1 = "-1qzkLmKuIw";                          // episodio 1 en YouTube
 const YT_EP1 = `https://youtu.be/${EP1}`;
 const azar = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
@@ -125,7 +126,7 @@ const VISTAS = {
         <span class="etiqueta">Para niños de 2 a 5 años</span>
         <h1>Aprender números y letras <em>es un juego</em></h1>
         <p>Caricaturas, canciones y juegos en español donde los números y las letras son personajes.</p>
-        <div class="acciones">${enlace("Ver episodios", "yt", YT, "primario")}${enlace("Jugar ahora", "play", "#juegos")}</div>
+        <div class="acciones">${enlace("Seguir en YouTube", "yt", SEGUIR, "primario")}${enlace("Jugar ahora", "play", "#juegos")}</div>
         <ul class="confianza"><li>${I.check}En español</li><li>${I.check}Sin anuncios en la web</li><li>${I.check}Sin sustos</li></ul>
       </div></div>
     </section>
@@ -168,6 +169,15 @@ const VISTAS = {
           <div class="acciones" style="margin-top:22px">${enlace("Escuchar la canción del Uno", "nota", "#cancion/uno", "oscuro")}</div>
         </div>
         <div class="karaoke" aria-hidden="true"><div>Uno, uno, tengo un puntito</div><div class="ahora">Uno, uno, derechito y bonito</div><div>Un sol, un árbol, un globo también</div><div>¡Uno, uno, lo cuento muy bien!</div></div>
+      </div>
+    </section>
+
+    <section class="seccion seguir">
+      <div class="contenedor seguir-caja">
+        <img src="img/uno.png" alt="" width="620" height="730">
+        <div><h2>¡No te pierdas ningún episodio!</h2>
+          <p>Cada semana llega un amigo nuevo a Cuentatún. Sigue el canal en YouTube y te avisamos cuando salga.</p>
+          <div class="acciones">${enlace("Seguir en YouTube", "yt", SEGUIR, "primario")}</div></div>
       </div>
     </section>
 
@@ -237,7 +247,7 @@ const VISTAS = {
         <a class="video" href="#episodio/1" aria-label="Ver el episodio 1"><img src="img/miniatura_ep01.jpg" alt="Episodio 1: ¡Llega el Uno!" width="1280" height="720"><span class="play">${I.play}</span></a>
         <div><span class="etiqueta">Episodio 1</span><h3>¡Llega el Uno!</h3>
           <p>Un puntito brillante cae del cielo y se dibuja un 1. Aprendemos cómo se escribe, buscamos cosas de las que hay solo una y cantamos la canción del Uno.</p>
-          <div class="acciones">${enlace("Ver el episodio", "play", "#episodio/1", "primario")}${enlace("En YouTube", "yt", YT_EP1)}</div></div>
+          <div class="acciones">${enlace("Ver el episodio", "play", "#episodio/1", "primario")}${enlace("Seguir en YouTube", "yt", SEGUIR)}</div></div>
       </div>
       <h2>Próximamente</h2>
       <div class="rejilla">${PERSONAJES.slice(1).map((p, i) => `<div class="personaje pronto" style="--c:${p.color}"><div class="foto" style="height:120px"><span class="simbolo" style="font-size:64px">${p.s}</span></div><h3 style="font-size:18px">Episodio ${i + 2}</h3><small>Llega ${p.nombre.toLowerCase().startsWith("la") ? p.nombre.toLowerCase() : "el " + p.nombre}</small></div>`).join("")}</div>`);

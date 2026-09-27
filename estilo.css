@@ -308,3 +308,13 @@ body.modo-juego .cabecera, body.modo-juego .pie { display: none; }
   .jbtn { width: 44px; height: 44px; }
   #jmudo { display: none; }
 }
+
+/* invitación a seguir el canal */
+.seccion.seguir { background: linear-gradient(135deg, #FF5A4E, #FF8A1F); color: #fff; padding: 64px 0; }
+.seguir-caja { display: flex; align-items: center; gap: 40px; }
+.seguir-caja img { width: 170px; flex: none; animation: brinco 2.8s ease-in-out infinite; transform-origin: bottom; filter: drop-shadow(0 12px 18px rgba(0,0,0,.2)); }
+.seguir-caja h2 { color: #fff; font-size: clamp(28px, 3.6vw, 42px); margin-bottom: 10px; }
+.seguir-caja p { margin: 0 0 22px; font-size: 19px; color: #FFF1E8; max-width: 560px; }
+.seguir .boton.primario { background: #fff; color: var(--coral); box-shadow: 0 10px 24px -10px rgba(0,0,0,.4); }
+.seguir .boton.primario:hover { background: #FFF3EE; }
+@media (max-width: 760px) { .seguir-caja { flex-direction: column; text-align: center; gap: 18px; } .seguir-caja img { width: 120px; } .seguir .acciones { justify-content: center; } }
