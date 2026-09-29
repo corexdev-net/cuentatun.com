@@ -135,6 +135,22 @@ const EPISODIOS = [
     resumen: "Una amiga alta y flaquita llega a Cuentatún: ¡la I! Aprendemos cómo suena, cómo se escribe y buscamos cosas que empiezan con I: iguana, isla e iglú.",
     aprende: ["La letra <b>I</b> y su sonido: <b>¡iii!</b>", "Cómo se escribe la I: ¡una raya derechita hacia abajo!", "Palabras con I: <b>i</b>guana, <b>i</b>sla, <b>i</b>glú", "Repaso: Uno, la A, Dos, la E y Tres"],
     juegos: [["La canción de la I", "nota", "#cancion/i"], ["Conoce a la I", "play", "#personaje/i"]] },
+  { n: 7, yt: "KP4wOvTfX14", titulo: "¡Llega Cuatro!", img: "img/miniatura_ep07.jpg",
+    resumen: "Llega un amigo nuevo con cuatro puntitos dorados: ¡Cuatro! Contamos sus puntitos, aprendemos cómo se escribe el 4 y contamos ruedas, estrellas y manzanas.",
+    aprende: ["El número <b>4</b> y la palabra <b>“cuatro”</b>", "Contar hasta cuatro: <b>uno, dos, tres, cuatro</b>", "Cómo se escribe el 4 (¡trázalo con tu dedito!)", "Repaso: Uno, la A, Dos, la E, Tres y la I"],
+    juegos: [["¿Cuántos hay?", "play", "#juego/cuantos"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
+  { n: 8, yt: "SYqPgsZma7s", titulo: "¡Llega la O!", img: "img/miniatura_ep08.jpg",
+    resumen: "Una amiga redondita llega a Cuentatún: ¡la O! Aprendemos cómo suena, cómo se escribe y buscamos cosas que empiezan con O: oso, oveja y ola.",
+    aprende: ["La letra <b>O</b> y su sonido: <b>¡ooo!</b>", "Cómo se escribe la O (¡trázala con tu dedito!)", "Palabras con O: <b>o</b>so, <b>o</b>veja, <b>o</b>la", "Repaso: Uno, la A, Dos, la E, Tres, la I y Cuatro"],
+    juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
+  { n: 9, yt: "hC8bDTWCG54", titulo: "¡Llega Cinco!", img: "img/miniatura_ep09.jpg",
+    resumen: "Llega un amigo nuevo con cinco puntitos dorados: ¡Cinco! Contamos sus puntitos, aprendemos cómo se escribe el 5 y contamos dedos, estrellas y globos.",
+    aprende: ["El número <b>5</b> y la palabra <b>“cinco”</b>", "Contar hasta cinco: <b>uno, dos, tres, cuatro, cinco</b>", "Cómo se escribe el 5 (¡trázalo con tu dedito!)", "Repaso: Uno, la A, Dos, la E, Tres, la I, Cuatro y la O"],
+    juegos: [["Revienta globos", "play", "#juego/globos"], ["¿Cuántos hay?", "play", "#juego/cuantos"]] },
+  { n: 10, yt: "eaQSsTthoa0", titulo: "¡Llega la U!", img: "img/miniatura_ep10.jpg",
+    resumen: "Llega una amiga nueva: ¡la U! Aprendemos cómo suena, cómo se escribe y buscamos cosas que empiezan con U: uvas, unicornio y uno.",
+    aprende: ["La letra <b>U</b> y su sonido: <b>¡uuu!</b>", "Cómo se escribe la U (¡trázala con tu dedito!)", "Palabras con U: <b>u</b>vas, <b>u</b>nicornio, <b>u</b>no", "Repaso: todos los amigos de la temporada 1"],
+    juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
 ];
 const ULTIMO = EPISODIOS[EPISODIOS.length - 1];
 const CANCIONES = {
@@ -375,7 +391,7 @@ const VISTAS = {
     pagina(`${miga("Episodios")}<h1>Temporada 1</h1>
       <p class="bajada">Los números del 1 al 5 y las vocales A, E, I, O, U. Cada episodio repasa a todos los amigos anteriores.</p>
       <div class="rejilla" style="margin-top:30px">${EPISODIOS.slice().reverse().map((e) => `<a class="juego-tarjeta" href="#episodio/${e.n}"><img src="${e.img}" alt="" width="1280" height="720" style="aspect-ratio:16/9;object-fit:cover"><div class="txt"><h3>Episodio ${e.n}: ${e.titulo}</h3></div></a>`).join("")}</div>
-      <h2>Próximamente</h2>
+      ${PERSONAJES.length > EPISODIOS.length ? "<h2>Próximamente</h2>" : ""}
       <div class="rejilla">${PERSONAJES.slice(EPISODIOS.length).map((p, i) => `<div class="personaje pronto" style="--c:${p.color}"><div class="foto" style="height:120px"><span class="simbolo" style="font-size:64px">${p.s}</span></div><h3 style="font-size:18px">Episodio ${i + EPISODIOS.length + 1}</h3><small>Llega ${p.nombre.startsWith("La ") ? "la " + p.s : "el " + p.nombre}</small></div>`).join("")}</div>`);
   },
 
