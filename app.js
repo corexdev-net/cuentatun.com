@@ -152,7 +152,14 @@ const EPISODIOS = [
     aprende: ["La letra <b>U</b> y su sonido: <b>¡uuu!</b>", "Cómo se escribe la U (¡trázala con tu dedito!)", "Palabras con U: <b>u</b>vas, <b>u</b>nicornio, <b>u</b>no", "Repaso: todos los amigos de la temporada 1"],
     juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
 ];
-const ULTIMO = EPISODIOS[EPISODIOS.length - 1];
+// Nueva temporada «Aprende con Tito y sus amigos» (estilo película)
+const NUEVA = [
+  { n: "tito-1", etq: "Nueva temporada · Episodio 1", yt: "6kjPfU3biD4", titulo: "¡El número 1! con Tito", img: "img/miniatura_tito01.jpg",
+    resumen: "Tito, el conejito del Bosque de Cuentatún, nos enseña el número uno: cómo se escribe, a buscar cosas de las que hay solo una y conocemos a su amiga Mimi. ¡Y cantamos la canción del uno!",
+    aprende: ["El número <b>1</b> y la palabra <b>“uno”</b>", "Cómo se escribe el 1: una rayita que sube y una raya larga hacia abajo", "Contar: <b>un</b> sol, <b>una</b> manzana, <b>una</b> mariposa"],
+    juegos: [["Traza el 1", "lapiz", "#juego/trazo"], ["¿Dónde hay uno?", "play", "#juego/donde"], ["Encuentra el 1", "play", "#juego/busca"]] },
+];
+const ULTIMO = NUEVA[NUEVA.length - 1];
 const CANCIONES = {
   uno: { titulo: "La canción del Uno", ep: 1, audio: "audio/cancion_del_uno.m4a", fin: 32, letra: [
     [8.6, "Uno, uno, tengo un puntito"], [12.8, "Uno, uno, derechito y bonito"],
@@ -259,9 +266,9 @@ const VISTAS = {
 
     <section class="seccion cielo">
       <div class="contenedor destacado">
-        <a class="video" href="#episodio/${ULTIMO.n}" aria-label="Ver el episodio ${ULTIMO.n}"><img src="${ULTIMO.img}" alt="Episodio ${ULTIMO.n}: ${ULTIMO.titulo}" width="1280" height="720" loading="lazy"><span class="play">${I.play}</span></a>
+        <a class="video" href="#episodio/${ULTIMO.n}" aria-label="Ver ${ULTIMO.titulo}"><img src="${ULTIMO.img}" alt="${ULTIMO.titulo}" width="1280" height="720" loading="lazy"><span class="play">${I.play}</span></a>
         <div>
-          <span class="etiqueta">¡Nuevo! · Episodio ${ULTIMO.n}</span>
+          <span class="etiqueta">¡Nuevo! · ${ULTIMO.etq || "Episodio " + ULTIMO.n}</span>
           <h3>${ULTIMO.titulo}</h3>
           <p>${ULTIMO.resumen}</p>
           <ul class="lista-check">${ULTIMO.aprende.slice(0, 3).map((x) => `<li><span>${x}</span></li>`).join("")}</ul>
@@ -388,7 +395,10 @@ const VISTAS = {
   },
 
   episodios() {
-    pagina(`${miga("Episodios")}<h1>Temporada 1</h1>
+    pagina(`${miga("Episodios")}<h1>Nueva temporada: Aprende con Tito y sus amigos</h1>
+      <p class="bajada">Tito enseña los números y Mimi las letras, ahora en estilo película. ¡Un episodio nuevo cada semana!</p>
+      <div class="rejilla" style="margin-top:30px">${NUEVA.slice().reverse().map((e) => `<a class="juego-tarjeta" href="#episodio/${e.n}"><img src="${e.img}" alt="" width="1280" height="720" style="aspect-ratio:16/9;object-fit:cover"><div class="txt"><h3>${e.titulo}</h3></div></a>`).join("")}</div>
+      <h1 style="margin-top:48px">Temporada 1</h1>
       <p class="bajada">Los números del 1 al 5 y las vocales A, E, I, O, U. Cada episodio repasa a todos los amigos anteriores.</p>
       <div class="rejilla" style="margin-top:30px">${EPISODIOS.slice().reverse().map((e) => `<a class="juego-tarjeta" href="#episodio/${e.n}"><img src="${e.img}" alt="" width="1280" height="720" style="aspect-ratio:16/9;object-fit:cover"><div class="txt"><h3>Episodio ${e.n}: ${e.titulo}</h3></div></a>`).join("")}</div>
       ${PERSONAJES.length > EPISODIOS.length ? "<h2>Próximamente</h2>" : ""}
@@ -425,6 +435,7 @@ const VISTAS = {
 
   "juego/puntitos": () => juegoPuntitos(),
   ...Object.fromEntries(EPISODIOS.map((e) => [`episodio/${e.n}`, () => vistaEpisodio(e)])),
+  ...Object.fromEntries(NUEVA.map((e) => [`episodio/${e.n}`, () => vistaEpisodio(e)])),
   ...Object.fromEntries(Object.keys(CANCIONES).map((id) => [`cancion/${id}`, () => vistaCancion(id)])),
   ...Object.fromEntries(Object.keys(FICHAS).map((id) => [`personaje/${id}`, () => vistaFicha(id)])),
   "juego/cuantos": () => juegoCuantos(),
@@ -438,8 +449,8 @@ const VISTAS = {
 };
 
 function vistaEpisodio(e) {
-  pagina(`${miga('<a href="#episodios">Episodios</a>', `Episodio ${e.n}`)}
-    <span class="etiqueta">Episodio ${e.n} · Temporada 1</span><h1 style="margin-top:14px">${e.titulo}</h1>
+  pagina(`${miga('<a href="#episodios">Episodios</a>', e.etq ? e.titulo : `Episodio ${e.n}`)}
+    <span class="etiqueta">${e.etq || `Episodio ${e.n} · Temporada 1`}</span><h1 style="margin-top:14px">${e.titulo}</h1>
     <p class="bajada">${e.resumen}</p>
     <button class="video reproductor" id="reproducir" style="max-width:760px;margin-top:24px;border:0;padding:0;cursor:pointer;width:100%" aria-label="Reproducir el episodio"><img src="${e.img}" alt="Episodio ${e.n}: ${e.titulo}" width="1280" height="720"><span class="play">${I.play}</span></button>
     <p class="aviso" style="margin-top:12px;max-width:760px">El video se reproduce desde YouTube (modo de privacidad mejorada) solo cuando presionas play. También puedes <a href="https://youtu.be/${e.yt}" rel="noopener">verlo en YouTube</a>.</p>
