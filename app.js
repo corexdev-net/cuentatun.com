@@ -158,6 +158,10 @@ const NUEVA = [
     resumen: "Tito, el conejito del Bosque de Cuentatún, nos enseña el número uno: cómo se escribe, a buscar cosas de las que hay solo una y conocemos a su amiga Mimi. ¡Y cantamos la canción del uno!",
     aprende: ["El número <b>1</b> y la palabra <b>“uno”</b>", "Cómo se escribe el 1: una rayita que sube y una raya larga hacia abajo", "Contar: <b>un</b> sol, <b>una</b> manzana, <b>una</b> mariposa"],
     juegos: [["Traza el 1", "lapiz", "#juego/trazo"], ["¿Dónde hay uno?", "play", "#juego/donde"], ["Encuentra el 1", "play", "#juego/busca"]] },
+  { n: "tito-2", etq: "Nueva temporada · Episodio 3", yt: "iHqDElsQmg0", titulo: "¡El número 2! con Tito", img: "img/miniatura_tito02.jpg",
+    resumen: "Tito nos enseña el número dos: cómo se escribe, contamos dos zapatos, dos pajaritos y dos manzanas, y llega Bruno. ¡Somos dos amigos! Y cantamos la canción del dos.",
+    aprende: ["El número <b>2</b> y la palabra <b>“dos”</b>", "Cómo se escribe el 2 (¡dibújalo en el aire con tu dedito!)", "Contar hasta dos: <b>uno, dos</b>"],
+    juegos: [["¿Cuántos hay?", "play", "#juego/cuantos"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
 ];
 const ULTIMO = NUEVA[NUEVA.length - 1];
 const CANCIONES = {
