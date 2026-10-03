@@ -166,6 +166,10 @@ const NUEVA = [
     resumen: "Tito nos enseña el número dos: cómo se escribe, contamos dos zapatos, dos pajaritos y dos manzanas, y llega Bruno. ¡Somos dos amigos! Y cantamos la canción del dos.",
     aprende: ["El número <b>2</b> y la palabra <b>“dos”</b>", "Cómo se escribe el 2 (¡dibújalo en el aire con tu dedito!)", "Contar hasta dos: <b>uno, dos</b>"],
     juegos: [["¿Cuántos hay?", "play", "#juego/cuantos"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
+  { n: "mimi-e", etq: "Nueva temporada · Episodio 4", yt: "ZfioQ_CEr1Y", titulo: "¡La letra E! con Mimi", img: "img/miniatura_mimi_e.jpg",
+    resumen: "Mimi nos enseña la letra E: cómo suena, cómo se escribe y buscamos cosas que empiezan con E: estrella, elefante y escalera. ¡Y llega Tula a cantar con nosotros!",
+    aprende: ["La letra <b>E</b> y su sonido: <b>¡eee!</b>", "Cómo se escribe la E (¡dibújala en el aire con tu dedito!)", "Palabras con E: <b>e</b>strella, <b>e</b>lefante, <b>e</b>scalera"],
+    juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
 ];
 const ULTIMO = NUEVA[NUEVA.length - 1];
 const CANCIONES = {
