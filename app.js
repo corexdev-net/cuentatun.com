@@ -170,6 +170,10 @@ const NUEVA = [
     resumen: "Mimi nos enseña la letra E: cómo suena, cómo se escribe y buscamos cosas que empiezan con E: estrella, elefante y escalera. ¡Y llega Tula a cantar con nosotros!",
     aprende: ["La letra <b>E</b> y su sonido: <b>¡eee!</b>", "Cómo se escribe la E (¡dibújala en el aire con tu dedito!)", "Palabras con E: <b>e</b>strella, <b>e</b>lefante, <b>e</b>scalera"],
     juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
+  { n: "tito-3", etq: "Nueva temporada · Episodio 5", yt: "O0795qJCcIc", titulo: "¡El número 3! con Tito", img: "img/miniatura_n03.jpg",
+    resumen: "Tito nos enseña el número tres: cómo se escribe y contamos tres mariposas, tres pelotas, tres piedritas. ¡Y cantamos con sus amigos!",
+    aprende: ["El número <b>3</b> y la palabra <b>“tres”</b>", "Cómo se escribe el 3 (¡dibújalo en el aire con tu dedito!)", "Contar hasta tres"],
+    juegos: [["¿Cuántos hay?", "play", "#juego/cuantos"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
 ];
 const ULTIMO = NUEVA[NUEVA.length - 1];
 const CANCIONES = {
