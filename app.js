@@ -174,6 +174,10 @@ const NUEVA = [
     resumen: "Tito nos enseña el número tres: cómo se escribe y contamos tres mariposas, tres pelotas, tres piedritas. ¡Y cantamos con sus amigos!",
     aprende: ["El número <b>3</b> y la palabra <b>“tres”</b>", "Cómo se escribe el 3 (¡dibújalo en el aire con tu dedito!)", "Contar hasta tres"],
     juegos: [["¿Cuántos hay?", "play", "#juego/cuantos"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
+  { n: "mimi-i", etq: "Nueva temporada · Episodio 6", yt: "T1ZNRQ3hz9s", titulo: "¡La letra I! con Mimi", img: "img/miniatura_i06.jpg",
+    resumen: "Mimi nos enseña la letra I: cómo suena, cómo se escribe y buscamos cosas que empiezan con I: iguana, isla, iglú.",
+    aprende: ["La letra <b>I</b> y su sonido: <b>¡Iii!</b>", "Cómo se escribe la I (¡dibújala en el aire con tu dedito!)", "Palabras con I: iguana, isla, iglú"],
+    juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
 ];
 const ULTIMO = NUEVA[NUEVA.length - 1];
 const CANCIONES = {
