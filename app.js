@@ -178,6 +178,10 @@ const NUEVA = [
     resumen: "Mimi nos enseña la letra I: cómo suena, cómo se escribe y buscamos cosas que empiezan con I: iguana, isla, iglú.",
     aprende: ["La letra <b>I</b> y su sonido: <b>¡Iii!</b>", "Cómo se escribe la I (¡dibújala en el aire con tu dedito!)", "Palabras con I: iguana, isla, iglú"],
     juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
+  { n: "tito-4", etq: "Nueva temporada · Episodio 7", yt: "hgDAUHsAGm4", titulo: "¡El número 4! con Tito", img: "img/miniatura_n04.jpg",
+    resumen: "Tito nos enseña el número cuatro: cómo se escribe y contamos cuatro ruedas, cuatro estrellas, cuatro manzanas. ¡Y cantamos con sus amigos!",
+    aprende: ["El número <b>4</b> y la palabra <b>“cuatro”</b>", "Cómo se escribe el 4 (¡dibújalo en el aire con tu dedito!)", "Contar hasta cuatro"],
+    juegos: [["¿Cuántos hay?", "play", "#juego/cuantos"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
 ];
 const ULTIMO = NUEVA[NUEVA.length - 1];
 const CANCIONES = {
