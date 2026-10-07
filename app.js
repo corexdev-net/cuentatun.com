@@ -182,6 +182,10 @@ const NUEVA = [
     resumen: "Tito nos enseña el número cuatro: cómo se escribe y contamos cuatro ruedas, cuatro estrellas, cuatro manzanas. ¡Y cantamos con sus amigos!",
     aprende: ["El número <b>4</b> y la palabra <b>“cuatro”</b>", "Cómo se escribe el 4 (¡dibújalo en el aire con tu dedito!)", "Contar hasta cuatro"],
     juegos: [["¿Cuántos hay?", "play", "#juego/cuantos"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
+  { n: "mimi-o", etq: "Nueva temporada · Episodio 8", yt: "ReGbuQ-wxaw", titulo: "¡La letra O! con Mimi", img: "img/miniatura_o08.jpg",
+    resumen: "Mimi nos enseña la letra O: cómo suena, cómo se escribe y buscamos cosas que empiezan con O: oso, oveja, ola.",
+    aprende: ["La letra <b>O</b> y su sonido: <b>¡Ooo!</b>", "Cómo se escribe la O (¡dibújala en el aire con tu dedito!)", "Palabras con O: oso, oveja, ola"],
+    juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
 ];
 const ULTIMO = NUEVA[NUEVA.length - 1];
 const CANCIONES = {
