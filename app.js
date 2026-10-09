@@ -190,6 +190,10 @@ const NUEVA = [
     resumen: "Tito nos enseña el número cinco: cómo se escribe y contamos cinco globos, cinco estrellas, cinco galletas. ¡Y cantamos con sus amigos!",
     aprende: ["El número <b>5</b> y la palabra <b>“cinco”</b>", "Cómo se escribe el 5 (¡dibújalo en el aire con tu dedito!)", "Contar hasta cinco"],
     juegos: [["¿Cuántos hay?", "play", "#juego/cuantos"], ["Cuenta los puntitos", "play", "#juego/puntitos"]] },
+  { n: "mimi-u", etq: "Nueva temporada · Episodio 10", yt: "tceptlu3skE", titulo: "¡La letra U! con Mimi", img: "img/miniatura_u10.jpg",
+    resumen: "Mimi nos enseña la letra U: cómo suena, cómo se escribe y buscamos cosas que empiezan con U: uvas, unicornio, uno.",
+    aprende: ["La letra <b>U</b> y su sonido: <b>¡Uuu!</b>", "Cómo se escribe la U (¡dibújala en el aire con tu dedito!)", "Palabras con U: uvas, unicornio, uno"],
+    juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
 ];
 const ULTIMO = NUEVA[NUEVA.length - 1];
 const CANCIONES = {
