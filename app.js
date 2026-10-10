@@ -214,6 +214,10 @@ const MUERTOS = [
     juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const CUENTOS = [
+  { n: "cuento-1", etq: "Cuento para dormir", yt: "pw3RSGPaFYg", titulo: "Tito y las estrellitas de la noche", img: "img/miniatura_c01.jpg",
+    resumen: "Tito descubre que la noche está llena de estrellitas amigas y aprende a dormir solito sin miedo a la oscuridad.",
+    aprende: ["Dormir solito sin miedo", "La noche y las estrellas", "Un cuento tranquilo para antes de dormir"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const tarjetaAmigo = (p) => `<a class="personaje" href="#episodios"><span class="insignia">${p.quien}</span><div class="foto" style="--c:${p.fondo}"><img src="img/amigo_${p.id}.png" alt="${p.nombre}" width="420" height="420" loading="lazy"></div><h3>${p.nombre}</h3><small>${p.lema}</small></a>`;
 const tarjetaEp = (e) => `<a class="juego-tarjeta" href="#episodio/${e.n}"><img src="${e.img}" alt="" width="1280" height="720" style="aspect-ratio:16/9;object-fit:cover"><div class="txt"><h3>${e.titulo}</h3></div></a>`;
