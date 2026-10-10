@@ -196,6 +196,22 @@ const NUEVA = [
     juegos: [["Memoria", "play", "#juego/memoria"], ["Colorea", "lapiz", "#juego/colorea"]] },
 ];
 const ULTIMO = NUEVA[NUEVA.length - 1];
+const AMIGOS = [
+  { id: "tito", nombre: "Tito", quien: "Conejito", color: C.turquesa, fondo: "#DDF6F4", lema: "Curioso y rápido. ¡Nos enseña los números!" },
+  { id: "mimi", nombre: "Mimi", quien: "Ovejita", color: C.rosa, fondo: "#FFE1EF", lema: "Dulce y tímida. ¡Nos enseña las letras!" },
+  { id: "tula", nombre: "Tula", quien: "Tortuguita", color: "#44AA55", fondo: "#E2F5E3", lema: "Paciente y sabia, con sus lentes redondos." },
+  { id: "bruno", nombre: "Bruno", quien: "Osito", color: C.naranja, fondo: "#FFE6CF", lema: "Bromista y comelón, con su gorra azul." },
+];
+const MUERTOS = [
+  { n: "muertos-1", etq: "Día de Muertos · Episodio 1", yt: "DQnm6P8MTvY", titulo: "¡Ya viene el Día de Muertos!", img: "img/miniatura_m01.jpg",
+    resumen: "Tito y Mamá Coneja van al mercado del pueblito a preparar el Día de Muertos y aprenden los colores: el naranja del cempasúchil, el morado del papel picado y el amarillo de las velitas.",
+    aprende: ["Los colores <b>naranja</b>, <b>morado</b> y <b>amarillo</b>", "Qué es el Día de Muertos: recordar con cariño", "La canción de los colores"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+];
+const CUENTOS = [
+];
+const tarjetaAmigo = (p) => `<a class="personaje" href="#episodios"><span class="insignia">${p.quien}</span><div class="foto" style="--c:${p.fondo}"><img src="img/amigo_${p.id}.png" alt="${p.nombre}" width="420" height="420" loading="lazy"></div><h3>${p.nombre}</h3><small>${p.lema}</small></a>`;
+const tarjetaEp = (e) => `<a class="juego-tarjeta" href="#episodio/${e.n}"><img src="${e.img}" alt="" width="1280" height="720" style="aspect-ratio:16/9;object-fit:cover"><div class="txt"><h3>${e.titulo}</h3></div></a>`;
 const CANCIONES = {
   uno: { titulo: "La canción del Uno", ep: 1, audio: "audio/cancion_del_uno.m4a", fin: 32, letra: [
     [8.6, "Uno, uno, tengo un puntito"], [12.8, "Uno, uno, derechito y bonito"],
@@ -282,21 +298,30 @@ const VISTAS = {
   inicio() {
     art.append(html(`
     <section class="heroe">
-      <picture><source media="(max-width: 760px)" srcset="img/portada-cel.jpg"><img class="heroe-img" src="img/portada.jpg" alt="Uno, el número 1 de Cuentatún, saludando en el prado" width="1920" height="1080"></picture>
+      <picture><source media="(max-width: 760px)" srcset="img/portada_tito-cel.jpg"><img class="heroe-img" src="img/portada_tito.jpg" alt="Tito, Mimi, Tula y Bruno en el prado del Bosque de Cuentatún" width="1920" height="1080"></picture>
       <div class="contenedor"><div class="heroe-texto">
         <span class="etiqueta">Para niños de 2 a 5 años</span>
-        <h1>Aprender números y letras <em>es un juego</em></h1>
-        <p>Caricaturas, canciones y juegos en español donde los números y las letras son personajes.</p>
-        <div class="acciones">${enlace("Seguir en YouTube", "yt", SEGUIR, "primario")}${enlace("Jugar ahora", "play", "#juegos")}</div>
+        <h1>Aprende con <em>Tito y sus amigos</em></h1>
+        <p>Tito, Mimi, Tula y Bruno enseñan números, letras y colores con caricaturas, canciones, cuentos y juegos en español.</p>
+        <div class="acciones">${enlace("Seguir en YouTube", "yt", SEGUIR, "primario")}${enlace("Ver episodios", "play", "#episodios")}</div>
         <ul class="confianza"><li>${I.check}En español</li><li>${I.check}Sin anuncios en la web</li><li>${I.check}Sin sustos</li></ul>
       </div></div>
     </section>
 
     <section class="seccion">
       <div class="contenedor">
-        <div class="encabezado"><div><h2>Conoce a los amigos</h2><p>Cada número tiene forma de número y lleva en la pancita tantos puntitos dorados como vale. En cada episodio llega uno nuevo.</p></div>
+        <div class="encabezado"><div><h2>Conoce a Tito y sus amigos</h2><p>Cuatro amigos del Bosque de Cuentatún. Tito enseña los números, Mimi las letras, y juntos cantan, cuentan y juegan.</p></div>
           <a class="enlace-flecha" href="#personajes">Ver a todos</a></div>
-        <div class="carrusel">${PERSONAJES.map(tarjetaPersonaje).join("")}</div>
+        <div class="carrusel">${AMIGOS.map(tarjetaAmigo).join("")}</div>
+      </div>
+    </section>
+
+    <section class="seccion" style="background:#FFF1E2">
+      <div class="contenedor">
+        <div class="encabezado"><div><span class="etiqueta">Temporada especial</span><h2>Día de Muertos con Tito y sus amigos 🌼</h2>
+          <p>Una temporada tierna y muy mexicana: el mercado, el papel picado, el pan de muerto, las calaveritas, las mariposas monarca, la ofrenda y Janitzio. ¡Sin sustos!</p></div>
+          <a class="enlace-flecha" href="#episodios">Ver la temporada</a></div>
+        <div class="rejilla">${MUERTOS.slice().reverse().map(tarjetaEp).join("")}</div>
       </div>
     </section>
 
@@ -355,9 +380,11 @@ const VISTAS = {
   },
 
   personajes() {
-    pagina(`${miga("Amigos")}<h1>Los amigos de Cuentatún</h1>
-      <p class="bajada">Números y letras con carita, cada uno con su color y su personalidad. En la temporada 1 llegan diez.</p>
-      <div class="rejilla" style="margin-top:30px">${PERSONAJES.map(tarjetaPersonaje).join("")}</div>`);
+    pagina(`${miga("Amigos")}<h1>Tito y sus amigos</h1>
+      <p class="bajada">Los protagonistas de Cuentatún: cuatro amigos del Bosque que aprenden y juegan contigo.</p>
+      <div class="rejilla" style="margin-top:30px">${AMIGOS.map(tarjetaAmigo).join("")}</div>
+      <h2 style="margin-top:48px">Los números y las letras de la temporada anterior</h2>
+      <div class="rejilla" style="margin-top:20px">${PERSONAJES.map(tarjetaPersonaje).join("")}</div>`);
   },
 
   "personaje/uno"() {
@@ -431,14 +458,37 @@ const VISTAS = {
   },
 
   episodios() {
-    pagina(`${miga("Episodios")}<h1>Nueva temporada: Aprende con Tito y sus amigos</h1>
+    pagina(`${miga("Episodios")}<h1>Día de Muertos con Tito y sus amigos 🌼</h1>
+      <p class="bajada">Temporada especial: tradiciones mexicanas contadas con cariño, colores y canciones. ¡Un episodio nuevo cada dos días!</p>
+      <div class="rejilla" style="margin-top:30px">${MUERTOS.slice().reverse().map(tarjetaEp).join("")}</div>
+      ${CUENTOS.length ? `<h1 style="margin-top:48px">Cuentos para dormir</h1><div class="rejilla" style="margin-top:30px">${CUENTOS.slice().reverse().map(tarjetaEp).join("")}</div>` : ""}
+      <h1 style="margin-top:48px">Aprende con Tito y sus amigos</h1>
       <p class="bajada">Tito enseña los números y Mimi las letras, ahora en estilo película. ¡Un episodio nuevo cada semana!</p>
       <div class="rejilla" style="margin-top:30px">${NUEVA.slice().reverse().map((e) => `<a class="juego-tarjeta" href="#episodio/${e.n}"><img src="${e.img}" alt="" width="1280" height="720" style="aspect-ratio:16/9;object-fit:cover"><div class="txt"><h3>${e.titulo}</h3></div></a>`).join("")}</div>
-      <h1 style="margin-top:48px">Temporada 1</h1>
+      <h1 style="margin-top:48px">Temporada anterior</h1>
       <p class="bajada">Los números del 1 al 5 y las vocales A, E, I, O, U. Cada episodio repasa a todos los amigos anteriores.</p>
       <div class="rejilla" style="margin-top:30px">${EPISODIOS.slice().reverse().map((e) => `<a class="juego-tarjeta" href="#episodio/${e.n}"><img src="${e.img}" alt="" width="1280" height="720" style="aspect-ratio:16/9;object-fit:cover"><div class="txt"><h3>Episodio ${e.n}: ${e.titulo}</h3></div></a>`).join("")}</div>
       ${PERSONAJES.length > EPISODIOS.length ? "<h2>Próximamente</h2>" : ""}
       <div class="rejilla">${PERSONAJES.slice(EPISODIOS.length).map((p, i) => `<div class="personaje pronto" style="--c:${p.color}"><div class="foto" style="height:120px"><span class="simbolo" style="font-size:64px">${p.s}</span></div><h3 style="font-size:18px">Episodio ${i + EPISODIOS.length + 1}</h3><small>Llega ${p.nombre.startsWith("La ") ? "la " + p.s : "el " + p.nombre}</small></div>`).join("")}</div>`);
+  },
+
+  cuentos() {
+    const P_ = [["tito", "Tito", "Conejito curioso y rápido… y un poquito miedoso de la oscuridad."],
+                ["mimi", "Mimi", "Ovejita esponjosa y tímida, con su moñito amarillo."],
+                ["tula", "Tula", "Tortuguita paciente y sabia, con sus lentes redondos."],
+                ["bruno", "Bruno", "Osito bromista y comelón, con su gorra azul."]];
+    const C_ = [["Tito y las estrellitas de la noche", "Para dormir solito sin miedo a la oscuridad."],
+                ["El columpio de Mimi", "Compartir y esperar turnos."],
+                ["La carrera de Tito y Tula", "Despacito y sin rendirse se llega a la meta."]];
+    pagina(`${miga("Cuentos")}<h1>Cuentos de Cuentatún</h1>
+      <p class="bajada">Historias originales para ver, escuchar y leer juntos antes de dormir. Cada cuento trae una enseñanza sencilla y preguntas para platicar en familia.</p>
+      <img src="img/portada_tito.jpg" alt="Tito, Mimi, Tula y Bruno en el prado" width="1280" height="720" style="width:100%;height:auto;border-radius:24px;margin-top:24px">
+      <h2>Los protagonistas</h2>
+      <div class="rejilla">${P_.map(([id, n, d]) => `<div class="personaje" style="--c:#8E6CF0"><div class="foto" style="--c:#EFEAFF"><img src="img/amigo_${id}.png" alt="${n}" width="420" height="750"></div><h3>${n}</h3><small>${d}</small></div>`).join("")}</div>
+      ${CUENTOS.length ? `<h2>Ya puedes verlos</h2><div class="rejilla">${CUENTOS.map(tarjetaEp).join("")}</div>` : ""}
+      <h2>Muy pronto</h2>
+      <div class="rejilla">${C_.map(([t, d]) => `<div class="juego-tarjeta pronto"><div class="ilus" style="--c:#DCD2FF"><span style="font-family:var(--titulo);font-size:54px;color:#fff">📖</span></div><div class="txt"><h3>${t}</h3><p>${d}</p></div></div>`).join("")}</div>
+      <p class="aviso" style="margin-top:24px">Cada cuento tendrá su video, el texto para leerlo juntos y una versión para imprimir.</p>`);
   },
 
   canciones() {
@@ -472,6 +522,7 @@ const VISTAS = {
   "juego/puntitos": () => juegoPuntitos(),
   ...Object.fromEntries(EPISODIOS.map((e) => [`episodio/${e.n}`, () => vistaEpisodio(e)])),
   ...Object.fromEntries(NUEVA.map((e) => [`episodio/${e.n}`, () => vistaEpisodio(e)])),
+  ...Object.fromEntries([...MUERTOS, ...CUENTOS].map((e) => [`episodio/${e.n}`, () => vistaEpisodio(e)])),
   ...Object.fromEntries(Object.keys(CANCIONES).map((id) => [`cancion/${id}`, () => vistaCancion(id)])),
   ...Object.fromEntries(Object.keys(FICHAS).map((id) => [`personaje/${id}`, () => vistaFicha(id)])),
   "juego/cuantos": () => juegoCuantos(),
