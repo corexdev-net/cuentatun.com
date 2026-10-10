@@ -38,7 +38,7 @@ const OBJETOS = {
 const ORDEN_OBJETOS = ["manzana", "estrella", "pelota", "flor", "manzana"];
 
 /* ---------- motor común ---------- */
-function crearJuego({ titulo, instruccion, rondas, fondoColor, iniciarRonda }) {
+function crearJuego({ titulo, instruccion, rondas, fondoColor, iniciarRonda, imgGuia = "img/uno.png", casi = "otravez", fin = ["muybien", "u_yupi"] }) {
   art.innerHTML = "";
   art.append(html(`<div class="jf">
     <div class="jbar">
@@ -52,7 +52,7 @@ function crearJuego({ titulo, instruccion, rondas, fondoColor, iniciarRonda }) {
       <div class="jcielo"><span class="jsol"></span><i class="nube n1"></i><i class="nube n2"></i></div>
       <svg class="jcolinas" viewBox="0 0 1000 200" preserveAspectRatio="none"><path d="M0 90 Q180 20 380 70 T760 60 T1000 80 V200 H0Z" fill="#A2DC84"/><path d="M0 130 Q250 70 520 120 T1000 110 V200 H0Z" fill="#7ACB62"/></svg>
       <svg class="jcapa" id="jcapa" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet"></svg>
-      <div class="jguia" id="jguia"><div class="jburbuja" id="jburbuja">${I.altavoz}</div><img src="img/uno.png" alt="Uno"></div>
+      <div class="jguia" id="jguia"><div class="jburbuja" id="jburbuja">${I.altavoz}</div><img src="${imgGuia}" alt=""></div>
       <svg class="jmano" id="jmano" viewBox="0 0 64 64" aria-hidden="true"><path d="M26 8a5 5 0 0 1 10 0v20l3-1a5 5 0 0 1 6 4l1 3a5 5 0 0 1 5 5v8c0 9-7 16-16 16h-4c-6 0-11-3-14-8l-7-12a4 4 0 0 1 6-5l6 5z" fill="#fff" stroke="#1B2A6B" stroke-width="3" stroke-linejoin="round"/></svg>
     </div>
   </div>`));
@@ -83,7 +83,7 @@ function crearJuego({ titulo, instruccion, rondas, fondoColor, iniciarRonda }) {
       guia.animate([{ transform: "rotate(0)" }, { transform: "rotate(-7deg)" }, { transform: "rotate(7deg)" }, { transform: "rotate(0)" }], { duration: 500 });
       if (el) el.animate([{ transform: "translateX(0)" }, { transform: "translateX(-12px)" }, { transform: "translateX(12px)" }, { transform: "translateX(0)" }], { duration: 380 });
       tono([330, 262], 0.12, "sine", 0.08);
-      await api.hablar("otravez");
+      await api.hablar(casi);
     },
   };
 
@@ -111,13 +111,13 @@ function crearJuego({ titulo, instruccion, rondas, fondoColor, iniciarRonda }) {
     const caja = document.createElement("div"); caja.className = "jpremio";
     caja.innerHTML = `<div class="jpremio-tarjeta">
       <div class="jpremio-estrellas">${"<i>★</i>".repeat(3)}</div>
-      <img src="img/uno.png" alt="">
+      <img src="${imgGuia}" alt="">
       <h2>¡Lo lograste!</h2>
       <div class="acciones" style="justify-content:center">${boton("Otra vez", "repetir", 'id="jotra"', "primario")}${enlace("Más juegos", "play", "#juegos")}</div>
     </div>`;
     $(".jescena").appendChild(caja); confeti(120);
     caja.querySelector("#jotra").onclick = () => { caja.remove(); ronda = 0; estrellas.forEach((e) => e.classList.remove("llena")); nueva(); };
-    api.hablar("muybien", "u_yupi");
+    api.hablar(...fin);
   }
 
   $("#joir").onclick = () => api.hablar(instruccion);
@@ -501,13 +501,14 @@ function juegoColorea() {
 }
 
 /* ---------- 9. Arma a Uno (rompecabezas) ---------- */
-function juegoRompe() {
+function juegoRompe(o = {}) {
+  const IMG = o.img || "img/uno.png", YUPI = o.yupi || "u_yupi";
   const CORTES = [[[0, 0, 1, 0.5], [0, 0.5, 1, 0.5]], [[0, 0, 1, 0.34], [0, 0.34, 1, 0.33], [0, 0.67, 1, 0.33]],
                   [[0, 0, 0.5, 0.5], [0.5, 0, 0.5, 0.5], [0, 0.5, 0.5, 0.5], [0.5, 0.5, 0.5, 0.5]]];
-  crearJuego({ titulo: "Arma a Uno", instruccion: "j_rompe", rondas: 3, iniciarRonda(api, r) {
-    const capa = api.capa, IW = 320, IH = 377, X0 = 110, Y0 = 70;
+  crearJuego({ titulo: o.titulo || "Arma a Uno", instruccion: o.instruccion || "j_rompe", rondas: 3, imgGuia: o.guia, casi: o.casi, fin: o.fin, iniciarRonda(api, r) {
+    const capa = api.capa, IW = o.IW || 320, IH = o.IH || 377, X0 = 110, Y0 = o.Y0 || 70;
     sv("rect", { x: X0 - 14, y: Y0 - 14, width: IW + 28, height: IH + 28, rx: 30, fill: "rgba(255,255,255,.7)", stroke: "#fff", "stroke-width": 6 }, capa);
-    sv("image", { href: "img/uno.png", x: X0, y: Y0, width: IW, height: IH, opacity: 0.18 }, capa);
+    sv("image", { href: IMG, x: X0, y: Y0, width: IW, height: IH, opacity: 0.18 }, capa);
     const defs = sv("defs", {}, capa); let puestas = 0; const piezas = [];
     const cortes = CORTES[r];
     cortes.forEach(([fx, fy, fw, fh], i) => sv("rect", { x: X0 + fx * IW, y: Y0 + fy * IH, width: fw * IW, height: fh * IH, fill: "none", stroke: "#8C9AC0", "stroke-width": 3, "stroke-dasharray": "10 8" }, capa));
@@ -517,7 +518,7 @@ function juegoRompe() {
       sv("rect", { x: X0 + fx * IW, y: Y0 + fy * IH, width: fw * IW, height: fh * IH, rx: 10 }, cp);
       const g = sv("g", { class: "tocable" }, capa);
       sv("rect", { x: X0 + fx * IW, y: Y0 + fy * IH, width: fw * IW, height: fh * IH, rx: 10, fill: "#fff", stroke: "#fff", "stroke-width": 8 }, g);
-      sv("image", { href: "img/uno.png", x: X0, y: Y0, width: IW, height: IH, "clip-path": `url(#${id})` }, g);
+      sv("image", { href: IMG, x: X0, y: Y0, width: IW, height: IH, "clip-path": `url(#${id})` }, g);
       const cx = X0 + (fx + fw / 2) * IW, cy = Y0 + (fy + fh / 2) * IH;
       const [lx, ly, lw, lh] = lugares[k], sep = 22;
       const destinoX = 560 + (lx + lw / 2) * IW + (lx > 0 ? sep : 0), destinoY = Y0 + (ly + lh / 2) * IH + (ly > 0 ? sep * Math.round(ly * 3) : 0);
@@ -531,14 +532,174 @@ function juegoRompe() {
         if (!arrastre) return; arrastre = null;
         if (Math.hypot(pz.dx, pz.dy) < 75) {            // cerca de su lugar: se acomoda sola
           pz.dx = 0; pz.dy = 0; pintar(); pz.puesta = true; puestas++; sfx.ding(); rebote(g); api.estallido(cx, cy, C.turquesa, 10);
-          if (puestas === cortes.length) { api.estallido(X0 + IW / 2, Y0 + IH / 2, C.sol, 24); await api.hablar("u_yupi"); api.acierto(); }
+          if (puestas === cortes.length) { api.estallido(X0 + IW / 2, Y0 + IH / 2, C.sol, 24); await api.hablar(YUPI); api.acierto(); }
         }
       });
       piezas.push(pz);
     });
     api.pista(() => { const p = piezas.find((x) => !x.puesta); return p && p.g.querySelector("rect"); });   // el marco real de la pieza
-    if (r > 0) api.hablar("j_rompe");
+    if (r > 0) api.hablar(o.instruccion || "j_rompe");
   } });
 }
+
+/* ================= Juegos de Tito y sus amigos ================= */
+const AMIGOS_J = ["tito", "mimi", "tula", "bruno", "mama", "xolo"];
+const COL_AMIGO = { tito: "#14B8B0", mimi: "#FF6FAE", tula: "#44AA55", bruno: "#FF8A1F", mama: "#8E6CF0", xolo: "#3D8BFF" };
+function tarjetaAmigoJ(capa, x, y, id, w = 210, h = 250) {   // tarjeta con la foto del amigo (para tocar)
+  const g = sv("g", { class: "tocable", transform: `translate(${x} ${y})` }, capa), cuerpo = sv("g", {}, g);
+  sv("rect", { x: -w / 2, y: -h / 2 + 9, width: w, height: h, rx: 36, fill: "rgba(0,0,0,.14)" }, cuerpo);
+  sv("rect", { x: -w / 2, y: -h / 2, width: w, height: h, rx: 36, fill: "#fff", stroke: COL_AMIGO[id], "stroke-width": 9 }, cuerpo);
+  sv("image", { href: `img/amigo_${id}.png`, x: -w / 2 + 12, y: -h / 2 + 12, width: w - 24, height: h - 24 }, cuerpo);
+  return { g, cuerpo };
+}
+
+/* ---------- ¿Quién habla? (Tito) ---------- */
+function juegoQuien() {
+  let ultimo = "";
+  crearJuego({ titulo: "¿Quién habla?", instruccion: "jq_inst", rondas: 5, imgGuia: "img/amigo_tito.png", casi: "j_casi_tito", fin: ["j_fin_tito"],
+    fondoColor: "#BFE6FF", iniciarRonda(api, r) {
+    const capa = api.capa; let quien; do { quien = AMIGOS_J[Math.floor(Math.random() * AMIGOS_J.length)]; } while (quien === ultimo); ultimo = quien;
+    const ops = barajar([quien, ...barajar(AMIGOS_J.filter((a) => a !== quien)).slice(0, r < 2 ? 1 : 2)]);
+    // botón grande para volver a escuchar la voz
+    const bocina = sv("g", { class: "tocable", transform: "translate(500 95)" }, capa);
+    sv("circle", { r: 62, fill: C.sol, stroke: "#fff", "stroke-width": 8 }, bocina);
+    sv("path", { d: "M-26 -16h16l22-20v72l-22-20h-16z", fill: C.marino, transform: "translate(-6 -2)" }, bocina);
+    sv("path", { d: "M22 -22a32 32 0 0 1 0 44M32 -34a48 48 0 0 1 0 68", fill: "none", stroke: C.marino, "stroke-width": 7, "stroke-linecap": "round" }, bocina);
+    aparecer(bocina); bocina.addEventListener("pointerdown", () => { api.tocado(); rebote(bocina); api.hablar(`jq_adivina_${quien}`); });
+    let bloqueado = false, correcta = null; const paso = ops.length === 2 ? 300 : 260;
+    ops.forEach((id, i) => {
+      const x = 500 + (i - (ops.length - 1) / 2) * paso, t = tarjetaAmigoJ(capa, x, 380, id); aparecer(t.cuerpo, 200 + i * 120);
+      if (id === quien) correcta = t.g;
+      t.g.addEventListener("pointerdown", async () => {
+        if (bloqueado) return; api.tocado();
+        if (id !== quien) { await api.fallo(t.cuerpo); api.hablar(`jq_adivina_${quien}`); return; }
+        bloqueado = true; rebote(t.cuerpo); api.estallido(x, 380, COL_AMIGO[id], 16); callar();
+        await api.hablar(`jq_soy_${quien}`); api.acierto();
+      });
+    });
+    api.pista(() => correcta);
+    (async () => { if (r > 0) await api.hablar("jq_otra"); else await pausa(3800); api.hablar(`jq_adivina_${quien}`); })();
+  } });
+}
+
+/* ---------- Cuenta zanahorias con Tito ---------- */
+function zanahoria(g) {
+  sv("ellipse", { cx: -10, cy: -36, rx: 9, ry: 20, fill: "#4CB648", transform: "rotate(-25 -10 -36)" }, g);
+  sv("ellipse", { cx: 10, cy: -36, rx: 9, ry: 20, fill: "#3FA33B", transform: "rotate(25 10 -36)" }, g);
+  sv("ellipse", { cx: 0, cy: -40, rx: 8, ry: 22, fill: "#5CC757" }, g);
+  sv("path", { d: "M-24 -22 Q0 -34 24 -22 L5 48 Q0 56 -5 48 Z", fill: "#FF8A1F", stroke: "#D9650A", "stroke-width": 3, "stroke-linejoin": "round" }, g);
+  for (const y of [-6, 12, 28]) sv("path", { d: `M-${14 - y / 6} ${y} q6 -3 10 0`, fill: "none", stroke: "#D9650A", "stroke-width": 3, "stroke-linecap": "round" }, g);
+}
+function juegoZanahorias() {
+  let ultimo = 0;
+  crearJuego({ titulo: "Cuenta con Tito", instruccion: "jz_inst", rondas: 5, imgGuia: "img/amigo_tito.png", casi: "j_casi_tito", fin: ["j_fin_tito"], iniciarRonda(api, r) {
+    const capa = api.capa, max = r < 2 ? 3 : 5; let n;
+    do { n = 1 + Math.floor(Math.random() * max); } while (n === ultimo); ultimo = n;
+    const paso = n > 4 ? 150 : 175, x0 = 500 - ((n - 1) * paso) / 2, objs = [];
+    for (let i = 0; i < n; i++) {
+      const g = sv("g", { transform: `translate(${x0 + i * paso} 200) scale(1.5)` }, capa), dentro = sv("g", {}, g);
+      zanahoria(dentro); aparecer(dentro, i * 120); objs.push(dentro);
+    }
+    const ops = new Set([n]); while (ops.size < 3) ops.add(1 + Math.floor(Math.random() * 5));
+    let bloqueado = false, correcta = null;
+    [...ops].sort(() => Math.random() - 0.5).forEach((v, i) => {
+      const x = 500 + (i - 1) * 230, col = [C.coral, C.azul, C.violeta][i];
+      const g = sv("g", { class: "tocable", transform: `translate(${x} 460)` }, capa), cuerpo = sv("g", {}, g);
+      sv("rect", { x: -92, y: -82, width: 184, height: 176, rx: 40, fill: "rgba(0,0,0,.14)", transform: "translate(0 9)" }, cuerpo);
+      sv("rect", { x: -92, y: -82, width: 184, height: 176, rx: 40, fill: col, stroke: "#fff", "stroke-width": 7 }, cuerpo);
+      const t = sv("text", { y: 30, "text-anchor": "middle", "font-family": "Fredoka", "font-size": 108, fill: "#fff" }, cuerpo); t.textContent = v;
+      for (let k = 0; k < v; k++) sv("circle", { cx: (k - (v - 1) / 2) * 24, cy: 64, r: 8, fill: "#fff", opacity: 0.9 }, cuerpo);
+      aparecer(cuerpo, 350 + i * 120); if (v === n) correcta = g;
+      g.addEventListener("pointerdown", async () => {
+        if (bloqueado) return; api.tocado();
+        if (v !== n) { api.fallo(cuerpo); return; }
+        bloqueado = true; rebote(cuerpo); api.estallido(x, 460, col); callar();
+        for (let k = 0; k < n; k++) {          // Tito cuenta una por una: lo que se dice es lo que se ve
+          rebote(objs[k]);
+          const et = sv("text", { x: x0 + k * paso, y: 95, "text-anchor": "middle", "font-family": "Fredoka", "font-size": 54, fill: C.marino, stroke: "#fff", "stroke-width": 8, "paint-order": "stroke" }, capa);
+          et.textContent = k + 1; aparecer(et); await api.hablar(`t_${k + 1}`);
+        }
+        api.acierto();
+      });
+    });
+    api.pista(() => correcta);
+    if (r > 0) api.hablar("jz_otra");
+  } });
+}
+
+/* ---------- Memoria de amigos (Mimi) ---------- */
+function juegoMemoriaAmigos() {
+  crearJuego({ titulo: "Memoria de amigos", instruccion: "jm_inst", rondas: 3, imgGuia: "img/amigo_mimi.png", casi: "j_casi_mimi", fin: ["j_fin_mimi"],
+    fondoColor: "#FFE1EF", iniciarRonda(api, r) {
+    const capa = api.capa, pares = r + 2, tipos = barajar(AMIGOS_J.slice()).slice(0, pares);
+    const cartas = barajar([...tipos, ...tipos]), cols = pares === 3 ? 3 : 4, filas = Math.ceil(cartas.length / cols);
+    const W = 150, H = 180; let abiertas = [], bloqueo = false, hechas = 0; const lista = [];
+    cartas.forEach((tipo, i) => {
+      const f = Math.floor(i / cols), c = i % cols, x = 500 + (c - (cols - 1) / 2) * (W + 34), y = 300 + (f - (filas - 1) / 2) * (H + 30);
+      const g = sv("g", { class: "tocable", transform: `translate(${x} ${y})` }, capa);
+      const giro = sv("g", {}, g); giro.style.transformBox = "fill-box"; giro.style.transformOrigin = "center";
+      sv("rect", { x: -W / 2, y: -H / 2 + 8, width: W, height: H, rx: 26, fill: "rgba(0,0,0,.14)" }, giro);
+      const dorso = sv("g", {}, giro);
+      sv("rect", { x: -W / 2, y: -H / 2, width: W, height: H, rx: 26, fill: C.rosa, stroke: "#fff", "stroke-width": 7 }, dorso);
+      sv("path", { d: "m0 -26 7.6 15.4 17 2.5-12.3 12 2.9 16.9L0 12.8l-15.2 8 2.9-16.9-12.3-12 17-2.5z", fill: "#fff", opacity: 0.85 }, dorso);
+      const cara = sv("g", { visibility: "hidden" }, giro);
+      sv("rect", { x: -W / 2, y: -H / 2, width: W, height: H, rx: 26, fill: "#fff", stroke: COL_AMIGO[tipo], "stroke-width": 7 }, cara);
+      sv("image", { href: `img/amigo_${tipo}.png`, x: -W / 2 + 8, y: -H / 2 + 10, width: W - 16, height: H - 20 }, cara);
+      aparecer(giro, i * 60);
+      const carta = { g, giro, tipo, abierta: false, hecha: false };
+      carta.voltear = async (abrir) => {
+        await giro.animate([{ transform: "scaleX(1)" }, { transform: "scaleX(0)" }], { duration: 140, fill: "forwards" }).finished;
+        dorso.setAttribute("visibility", abrir ? "hidden" : "visible"); cara.setAttribute("visibility", abrir ? "visible" : "hidden");
+        await giro.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: 160, fill: "forwards" }).finished;
+      };
+      g.addEventListener("pointerdown", async () => {
+        if (bloqueo || carta.abierta || carta.hecha) return; api.tocado();
+        carta.abierta = true; sfx.pop(); abiertas.push(carta); await carta.voltear(true);
+        if (abiertas.length < 2) return;
+        bloqueo = true; const [a, b] = abiertas; abiertas = [];
+        if (a.tipo === b.tipo) {
+          a.hecha = b.hecha = true; hechas++; rebote(a.giro); rebote(b.giro); sfx.ding(); api.estallido(x, y, COL_AMIGO[tipo], 12);
+          await api.hablar("jm_pareja"); bloqueo = false; if (hechas === pares) api.acierto();
+        } else {
+          tono([330, 262], 0.1, "sine", 0.06); await pausa(800);
+          a.abierta = b.abierta = false; await Promise.all([a.voltear(false), b.voltear(false)]); bloqueo = false;
+        }
+      });
+      lista.push(carta);
+    });
+    api.pista(() => { const c = lista.find((x) => !x.hecha && !x.abierta); return c && c.g; });
+    if (r > 0) api.hablar("jm_inst");
+  } });
+}
+
+/* ---------- Colores con Mamá Coneja (Día de Muertos) ---------- */
+function juegoColoresMuertos() {
+  const orden = barajar(["naranja", "morado", "amarillo", "naranja", "morado", "amarillo"]);
+  crearJuego({ titulo: "Colores con Mamá Coneja", instruccion: "jc_inst", rondas: 6, imgGuia: "img/amigo_mama.png", casi: "j_casi_mama", fin: ["j_fin_mama"],
+    fondoColor: "#FFE6C7", iniciarRonda(api, r) {
+    const capa = api.capa, color = orden[r], defs = sv("defs", {}, capa); let bloqueado = false, correcta = null;
+    barajar(["naranja", "morado", "amarillo"]).forEach((c, i) => {
+      const x = 500 + (i - 1) * 290, y = 330, L = 250, id = `cm${r}_${i}`;
+      const cp = sv("clipPath", { id }, defs); sv("rect", { x: -L / 2, y: -L / 2, width: L, height: L, rx: 40 }, cp);
+      const g = sv("g", { class: "tocable", transform: `translate(${x} ${y})` }, capa), cuerpo = sv("g", {}, g);
+      sv("rect", { x: -L / 2 - 8, y: -L / 2 + 2, width: L + 16, height: L + 16, rx: 46, fill: "rgba(0,0,0,.14)" }, cuerpo);
+      sv("rect", { x: -L / 2 - 8, y: -L / 2 - 8, width: L + 16, height: L + 16, rx: 46, fill: "#fff" }, cuerpo);
+      sv("image", { href: `img/color_${c}.jpg`, x: -L / 2, y: -L / 2, width: L, height: L, "clip-path": `url(#${id})` }, cuerpo);
+      aparecer(cuerpo, i * 140); if (c === color) correcta = g;
+      g.addEventListener("pointerdown", async () => {
+        if (bloqueado) return; api.tocado();
+        if (c !== color) { await api.fallo(cuerpo); api.hablar(`jc_${color}`); return; }
+        bloqueado = true; rebote(cuerpo); api.estallido(x, y, { naranja: "#FF8A1F", morado: "#9B4DCA", amarillo: "#FFD23F" }[c], 18); callar();
+        await api.hablar(`jc_bien_${color}`); api.acierto();
+      });
+    });
+    api.pista(() => correcta);
+    (async () => { if (r === 0) await pausa(3600); api.hablar(`jc_${color}`); })();
+  } });
+}
+
+/* ---------- Arma a Tito y sus amigos (Bruno) ---------- */
+const juegoRompeAmigos = () => juegoRompe({ titulo: "Arma a Tito y sus amigos", instruccion: "jr_inst", img: "img/rompe_amigos.jpg", IW: 400, IH: 300, Y0: 120,
+  guia: "img/amigo_bruno.png", casi: "j_casi_bruno", fin: ["j_fin_bruno"], yupi: "jr_yupi" });
 
 iniciar();

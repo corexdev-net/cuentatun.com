@@ -100,6 +100,11 @@ ILUS.memoria = `<svg viewBox="0 0 120 90"><rect x="16" y="20" width="26" height=
 ILUS.colorea = `<svg viewBox="0 0 120 90"><path d="M44 34 C50 28 56 20 61 19 C66 18 62 44 62 70" fill="none" stroke="#1B2A6B" stroke-width="14" stroke-linecap="round"/><path d="M44 34 C50 28 56 20 61 19 C66 18 62 44 62 70" fill="none" stroke="#FF6FAE" stroke-width="9" stroke-linecap="round"/><g transform="translate(86 44) rotate(35)"><rect x="-4" y="-22" width="8" height="30" rx="3" fill="#8B5A2B"/><path d="M-6 8 h12 v6 q-6 10 -12 0z" fill="#FF5A4E"/></g></svg>`;
 ILUS.rompe = `<svg viewBox="0 0 120 90"><rect x="34" y="14" width="26" height="30" rx="5" fill="#14B8B0" stroke="#fff" stroke-width="2.5"/><rect x="62" y="14" width="26" height="30" rx="5" fill="#14B8B0" stroke="#fff" stroke-width="2.5" transform="rotate(8 75 29)"/><rect x="34" y="46" width="26" height="30" rx="5" fill="#14B8B0" stroke="#fff" stroke-width="2.5"/><rect x="64" y="50" width="26" height="30" rx="5" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="4 3"/><circle cx="47" cy="58" r="4" fill="#FFC83A"/></svg>`;
 const JUEGOS = [
+  { id: "quien", nombre: "¿Quién habla?", desc: "Escucha la voz y toca al amigo que habla.", c: "#BFE6FF", amigo: "tito", nuevo: true },
+  { id: "zanahorias", nombre: "Cuenta con Tito", desc: "Cuenta las zanahorias de Tito.", c: "#FFE0C2", amigo: "tito", nuevo: true },
+  { id: "memoria-amigos", nombre: "Memoria de amigos", desc: "Encuentra a los amigos iguales.", c: "#FFE1EF", amigo: "mimi", nuevo: true },
+  { id: "colores", nombre: "Colores con Mamá Coneja", desc: "Naranja, morado y amarillo de Día de Muertos.", c: "#FFE6C7", amigo: "mama", nuevo: true },
+  { id: "rompe-amigos", nombre: "Arma a Tito y sus amigos", desc: "Arrastra las piezas del rompecabezas.", c: "#E2F5E3", amigo: "bruno", nuevo: true },
   { id: "puntitos", nombre: "Cuenta los puntitos", desc: "Toca cada puntito y cuéntalos en voz alta.", c: "#FFE9A6" },
   { id: "cuantos", nombre: "¿Cuántos hay?", desc: "Cuenta y elige el número correcto.", c: "#FFD3CF" },
   { id: "trazo", nombre: "Traza el 1", desc: "Sigue el camino con tu dedito.", c: "#C9F0EC" },
@@ -285,7 +290,7 @@ function vistaFicha(id) {
         ${e ? `<tr><th>Episodio</th><td><a href="#episodio/${e.n}">${e.titulo}</a></td></tr>` : ""}</table>
     </aside></div>`);
 }
-const tarjetaJuego = (j) => `<a class="juego-tarjeta" href="#juego/${j.id}"><div class="ilus" style="--c:${j.c}">${ILUS[j.id]}</div>
+const tarjetaJuego = (j) => `<a class="juego-tarjeta" href="#juego/${j.id}"><div class="ilus" style="--c:${j.c}">${j.amigo ? `<img src="img/amigo_${j.amigo}.png" alt="" style="height:88%;width:auto;margin:auto;display:block">` : ILUS[j.id]}</div>
   <div class="txt"><h3>${j.nombre}</h3><p>${j.desc}</p></div></a>`;
 const tarjetaPersonaje = (p) => p.listo
   ? `<a class="personaje" href="#personaje/${p.id}"><span class="insignia">¡Ya llegó!</span><div class="foto" style="--c:${p.fondo}"><img src="${p.img}" alt="${p.nombre}" width="620" height="730"></div><h3>${p.nombre}</h3><small>${p.lema}</small></a>`
@@ -340,7 +345,7 @@ const VISTAS = {
 
     <section class="seccion marino">
       <div class="contenedor">
-        <div class="encabezado"><div><h2>Juegos para aprender</h2><p>Nueve juegos que hablan, así que no hace falta saber leer. Se juegan con un dedito en el celular o la tableta.</p></div>
+        <div class="encabezado"><div><h2>Juega con Tito y sus amigos</h2><p>Juegos que hablan con la voz de cada amigo, así que no hace falta saber leer. Se juegan con un dedito en el celular o la tableta.</p></div>
           <a class="enlace-flecha" href="#juegos" style="color:#fff">Todos los juegos</a></div>
         <div class="rejilla">${JUEGOS.slice(0, 8).map(tarjetaJuego).join("")}</div>
       </div>
@@ -499,8 +504,11 @@ const VISTAS = {
 
   juegos() {
     pagina(`${miga("Juegos")}<h1>¿A qué quieres jugar?</h1>
-      <p class="bajada">Juegos para contar y trazar. Todos hablan, así que no hace falta saber leer.</p>
-      <div class="rejilla" style="margin-top:30px">${JUEGOS.map(tarjetaJuego).join("")}</div>`);
+      <p class="bajada">Juegos para escuchar, contar, recordar y armar. Todos hablan, así que no hace falta saber leer.</p>
+      <h2 style="margin-top:30px">Juega con Tito y sus amigos</h2>
+      <div class="rejilla" style="margin-top:20px">${JUEGOS.filter((j) => j.amigo).map(tarjetaJuego).join("")}</div>
+      <h2 style="margin-top:44px">Más juegos de números</h2>
+      <div class="rejilla" style="margin-top:20px">${JUEGOS.filter((j) => !j.amigo).map(tarjetaJuego).join("")}</div>`);
     decir("elige");
   },
 
@@ -533,6 +541,11 @@ const VISTAS = {
   "juego/memoria": () => juegoMemoria(),
   "juego/colorea": () => juegoColorea(),
   "juego/rompe": () => juegoRompe(),
+  "juego/quien": () => juegoQuien(),
+  "juego/zanahorias": () => juegoZanahorias(),
+  "juego/memoria-amigos": () => juegoMemoriaAmigos(),
+  "juego/colores": () => juegoColoresMuertos(),
+  "juego/rompe-amigos": () => juegoRompeAmigos(),
 };
 
 function vistaEpisodio(e) {
