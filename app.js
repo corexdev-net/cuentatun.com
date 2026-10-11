@@ -212,6 +212,10 @@ const MUERTOS = [
     resumen: "Tito y Mamá Coneja van al mercado del pueblito a preparar el Día de Muertos y aprenden los colores: el naranja del cempasúchil, el morado del papel picado y el amarillo de las velitas.",
     aprende: ["Los colores <b>naranja</b>, <b>morado</b> y <b>amarillo</b>", "Qué es el Día de Muertos: recordar con cariño", "La canción de los colores"],
     juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+  { n: "muertos-2", etq: "Día de Muertos · Episodio 2", yt: "keIJ9kECGfc", titulo: "¡Papel picado!", img: "img/miniatura_m02.jpg",
+    resumen: "Mimi le enseña a Tito a hacer papel picado y contamos 5 banderitas, 4 flores de cempasúchil y 3 velitas.",
+    aprende: ["Cómo se hace el papel picado", "Contar hasta <b>cinco</b>", "La canción del papel picado"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const CUENTOS = [
   { n: "cuento-1", etq: "Cuento para dormir", yt: "pw3RSGPaFYg", titulo: "Tito y las estrellitas de la noche", img: "img/miniatura_c01.jpg",
