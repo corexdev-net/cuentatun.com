@@ -216,6 +216,10 @@ const MUERTOS = [
     resumen: "Mimi le enseña a Tito a hacer papel picado y contamos 5 banderitas, 4 flores de cempasúchil y 3 velitas.",
     aprende: ["Cómo se hace el papel picado", "Contar hasta <b>cinco</b>", "La canción del papel picado"],
     juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+  { n: "muertos-3", etq: "Día de Muertos · Episodio 3", yt: "jroMaiKKyXU", titulo: "¡Pan de muerto!", img: "img/miniatura_m03.jpg",
+    resumen: "Bruno ayuda a Mamá Coneja a hornear pan de muerto y aprendemos el círculo: el pan, el plato y la naranja son redondos.",
+    aprende: ["La figura del <b>círculo</b>", "Cómo se hace el pan de muerto", "El horno lo usa un adulto"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const CUENTOS = [
   { n: "cuento-1", etq: "Cuento para dormir", yt: "pw3RSGPaFYg", titulo: "Tito y las estrellitas de la noche", img: "img/miniatura_c01.jpg",
