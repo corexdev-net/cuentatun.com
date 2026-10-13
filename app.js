@@ -523,6 +523,7 @@ const VISTAS = {
   papas() {
     pagina(`${miga("Familias")}<span class="etiqueta">Para mamás, papás y maestros</span><h1 style="margin-top:14px">Sobre Cuentatún</h1>
       <p class="bajada">Caricaturas y juegos educativos en español para niños de 2 a 5 años. Un desarrollo de CorexDev.</p>
+      <div class="acciones" style="margin-top:18px">${enlace("Seguir en YouTube", "yt", SEGUIR, "primario")}${enlace("Síguenos en Facebook", "", "https://www.facebook.com/profile.php?id=61595083542130")}</div>
       <div class="pilares" style="margin-top:30px">
         <div class="pilar"><div class="ico" style="--c:${C.turquesa}">${I.ojo}</div><h3>Lo que se dice, se ve</h3><p>Si decimos “tres”, en pantalla hay exactamente tres. Cada número lleva sus puntitos dorados.</p></div>
         <div class="pilar"><div class="ico" style="--c:${C.coral}">${I.corazon}</div><h3>Tranquilo y alegre</h3><p>Ritmo pausado, colores suaves, canciones originales y nada de sustos.</p></div>
