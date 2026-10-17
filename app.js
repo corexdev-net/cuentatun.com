@@ -220,6 +220,14 @@ const MUERTOS = [
     resumen: "Bruno ayuda a Mamá Coneja a hornear pan de muerto y aprendemos el círculo: el pan, el plato y la naranja son redondos.",
     aprende: ["La figura del <b>círculo</b>", "Cómo se hace el pan de muerto", "El horno lo usa un adulto"],
     juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+  { n: "muertos-4", etq: "Día de Muertos · Episodio 4", yt: "O1Id6AM3Gjs", titulo: "¡Calaveritas de azúcar!", img: "img/miniatura_m04.jpg",
+    resumen: "Tula le pone a cada calaverita de azúcar el nombre de un amigo y descubrimos con qué letra empieza cada nombre.",
+    aprende: ["La primera letra de cada nombre: <b>T</b>, <b>M</b>, <b>B</b>", "Qué son las calaveritas de azúcar", "La canción de las calaveritas"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+  { n: "muertos-5", etq: "Día de Muertos · Episodio 5", yt: "lJ1vP9CHnIs", titulo: "¡Las mariposas monarca!", img: "img/miniatura_m05.jpg",
+    resumen: "Tito y Mimi ven llegar a las mariposas monarca al campo de cempasúchil y contamos 1, 3 y 5 mariposas.",
+    aprende: ["Las mariposas monarca viajan muy lejos", "Contar <b>1</b>, <b>3</b> y <b>5</b>", "La canción de las mariposas"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const CUENTOS = [
   { n: "cuento-1", etq: "Cuento para dormir", yt: "pw3RSGPaFYg", titulo: "Tito y las estrellitas de la noche", img: "img/miniatura_c01.jpg",
