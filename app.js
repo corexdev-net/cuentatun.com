@@ -228,6 +228,10 @@ const MUERTOS = [
     resumen: "Tito y Mimi ven llegar a las mariposas monarca al campo de cempasúchil y contamos 1, 3 y 5 mariposas.",
     aprende: ["Las mariposas monarca viajan muy lejos", "Contar <b>1</b>, <b>3</b> y <b>5</b>", "La canción de las mariposas"],
     juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+  { n: "muertos-6", etq: "Día de Muertos · Episodio 6", yt: "4YDm0Axjk60", titulo: "¡La ofrenda de los abuelitos!", img: "img/miniatura_m06.jpg",
+    resumen: "Todos ponen la ofrenda para recordar con cariño a los abuelitos de Tito, y contamos tres velitas.",
+    aprende: ["Qué lleva una ofrenda", "Recordar con cariño a quienes queremos", "Contar <b>tres</b> velitas"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const CUENTOS = [
   { n: "cuento-1", etq: "Cuento para dormir", yt: "pw3RSGPaFYg", titulo: "Tito y las estrellitas de la noche", img: "img/miniatura_c01.jpg",
