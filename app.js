@@ -232,6 +232,10 @@ const MUERTOS = [
     resumen: "Todos ponen la ofrenda para recordar con cariño a los abuelitos de Tito, y contamos tres velitas.",
     aprende: ["Qué lleva una ofrenda", "Recordar con cariño a quienes queremos", "Contar <b>tres</b> velitas"],
     juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+  { n: "muertos-7", etq: "Día de Muertos · Episodio 7", yt: "7EXORcF1N_w", titulo: "¡Visita a Janitzio!", img: "img/miniatura_m07.jpg",
+    resumen: "Tito y Mamá Coneja viajan en canoa por el lago de Pátzcuaro, ven las redes de mariposa y la isla de Janitzio llena de velitas.",
+    aprende: ["Janitzio y el lago de Pátzcuaro, en Michoacán", "En la canoa, siempre con chaleco", "Contar <b>cuatro</b> canoas"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const CUENTOS = [
   { n: "cuento-1", etq: "Cuento para dormir", yt: "pw3RSGPaFYg", titulo: "Tito y las estrellitas de la noche", img: "img/miniatura_c01.jpg",
