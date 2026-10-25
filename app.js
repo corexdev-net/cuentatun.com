@@ -236,6 +236,10 @@ const MUERTOS = [
     resumen: "Tito y Mamá Coneja viajan en canoa por el lago de Pátzcuaro, ven las redes de mariposa y la isla de Janitzio llena de velitas.",
     aprende: ["Janitzio y el lago de Pátzcuaro, en Michoacán", "En la canoa, siempre con chaleco", "Contar <b>cuatro</b> canoas"],
     juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+  { n: "muertos-9", etq: "Día de Muertos · Especial", yt: "nRodDyD1gHk", titulo: "¡Me da mi calaverita!", img: "img/miniatura_m09.jpg",
+    resumen: "Tito, Mimi, Tula y Bruno se disfrazan y salen con Mamá Coneja a pedir calaverita. ¡Y contamos cinco dulces!",
+    aprende: ["Pedir calaverita siempre con un adulto", "Dar las gracias", "Contar <b>cinco</b> dulces"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const CUENTOS = [
   { n: "cuento-1", etq: "Cuento para dormir", yt: "pw3RSGPaFYg", titulo: "Tito y las estrellitas de la noche", img: "img/miniatura_c01.jpg",
