@@ -240,6 +240,10 @@ const MUERTOS = [
     resumen: "Tito, Mimi, Tula y Bruno se disfrazan y salen con Mamá Coneja a pedir calaverita. ¡Y contamos cinco dulces!",
     aprende: ["Pedir calaverita siempre con un adulto", "Dar las gracias", "Contar <b>cinco</b> dulces"],
     juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
+  { n: "muertos-8", etq: "Día de Muertos · Episodio 8", yt: "VeZWkNVSqAU", titulo: "Xolo y el camino de flores", img: "img/miniatura_m08.jpg",
+    resumen: "Un cuento muy especial: Xolo, el perrito xoloitzcuintle, sigue el caminito de flores de cempasúchil.",
+    aprende: ["Quién es Xolo, el perrito xoloitzcuintle", "El camino de flores de cempasúchil", "Un cuento para platicar en familia"],
+    juegos: [["Colorea", "lapiz", "#juego/colorea"], ["Memoria", "play", "#juego/memoria"]] },
 ];
 const CUENTOS = [
   { n: "cuento-1", etq: "Cuento para dormir", yt: "pw3RSGPaFYg", titulo: "Tito y las estrellitas de la noche", img: "img/miniatura_c01.jpg",
